@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app-testing/app-testing.iml" filepath="$PROJECT_DIR$/app-testing/app-testing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app-testing/app-testing-grailsPlugins.iml" filepath="$PROJECT_DIR$/app-testing/app-testing-grailsPlugins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/grails-jasper-reports.iml" filepath="$PROJECT_DIR$/grails-jasper-reports.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app-testing/jasperReports-inplacePlugin.iml" filepath="$PROJECT_DIR$/app-testing/jasperReports-inplacePlugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/viewTools-inplacePlugin.iml" filepath="$PROJECT_DIR$/viewTools-inplacePlugin.iml" />
+    </modules>
+  </component>
+</project>
