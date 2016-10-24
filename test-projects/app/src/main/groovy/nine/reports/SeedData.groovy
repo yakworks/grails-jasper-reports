@@ -45,9 +45,9 @@ class SeedData {
         Date dateFrom = Date.parse('yyyy-MM-dd', '2016-01-01')
         Range<Date> range = dateFrom..Date.parse('yyyy-MM-dd', '2016-12-31')
         def addPart = new Random().nextInt(range.to - range.from + 1)
-        println addPart
+        //println addPart
         Date dt = dateFrom + addPart
-        println dt
+        //println dt
         return dt
     }
 
@@ -62,7 +62,7 @@ class SeedData {
 
     static Boolean randomBool() {
         Boolean tf = rand.nextBoolean()
-        println tf
+        //println tf
         return tf
     }
 

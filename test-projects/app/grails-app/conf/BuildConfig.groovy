@@ -1,5 +1,5 @@
 grails.useGrails3FolderLayout = true
-grails.plugin.location."jasper-reports" = "../"
+grails.plugin.location."jasper-reports" = "../../"
 //grails.plugin.location."view-tools" = "../../grails-view-tools"
 //grails.plugin.location."dynamic-jasper" = "../dynamic-jasper"
 
@@ -58,17 +58,17 @@ grails.project.dependency.resolution = {
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
 
 
-        compile('ar.com.fdvs:DynamicJasper:5.0.10'){
-            excludes 'jasperreports'
-        }
-        build('ar.com.fdvs:DynamicJasper-core-fonts:1.0')
+        // compile('ar.com.fdvs:DynamicJasper:5.0.10'){
+        //     excludes 'jasperreports'
+        // }
+        // build('ar.com.fdvs:DynamicJasper-core-fonts:1.0')
 
     }
 
     plugins {
         // plugins for the build system only
         build(":tomcat:7.0.70"){
-            exclude "ecj"
+            exclude "ecj" //<-- this needs to be excluded for java 8 and not to conflict with the newer one in jasper
         } // or ":tomcat:8.0.22"
 
         // plugins for the compile step
