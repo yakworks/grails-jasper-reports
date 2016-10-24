@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperTemplate PUBLIC "-//JasperReports//DTD Template//EN"
+		"http://jasperreports.sourceforge.net/dtds/jaspertemplate.dtd">
+
+<jasperTemplate>
+	<style name="root" isBlankWhenNull="true" fontName="DejaVu Sans" fontSize="10" isBold="false" isItalic="false"/>
+	<style name="bold" style="root" forecolor="#333333" isBlankWhenNull="true" isBold="true"/>
+	<style name="boldCentered" style="bold" hTextAlign="Center" vTextAlign="Middle" isBlankWhenNull="true"/>
+	<style name="bold22Centered" style="boldCentered" isBlankWhenNull="true" fontSize="22"/>
+	<style name="italic" style="root" isBlankWhenNull="true" isItalic="true"/>
+	<style name="bold18Centered" style="boldCentered" isBlankWhenNull="true" fontSize="18"/>
+
+	<style name="columnTitle" style="bold" mode="Opaque" forecolor="#4D545A" backcolor="#F9FAFB" hTextAlign="Center" isBlankWhenNull="true">
+		<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5">
+			<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#BBBBBB"/>
+			<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#BBBBBB"/>
+			<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#BBBBBB"/>
+			<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#BBBBBB"/>
+		</box>
+	</style>
+	<style name="column" style="root" vTextAlign="Middle" isBlankWhenNull="true">
+		<box topPadding="3" leftPadding="5" bottomPadding="3" rightPadding="5"/>
+	</style>
+	<style name="columnWithGridLines" style="column" isBlankWhenNull="true">
+		<box>
+			<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#DDDDDD"/>
+			<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#DDDDDD"/>
+		</box>
+	</style>
+
+	<style name="group" style="bold" forecolor="#2E4E6F" hTextAlign="Left" isBlankWhenNull="true" fontSize="13">
+		<box topPadding="5" bottomPadding="5"/>
+	</style>
+	<style name="groupTitle" style="group" />
+
+	<style name="groupFooter" style="group" isBlankWhenNull="true">
+		<box topPadding="0" bottomPadding="0"/>
+	</style>
+	<style name="subtotal" style="bold" isBlankWhenNull="true" fontSize="10">
+		<box topPadding="3" leftPadding="5" bottomPadding="3" rightPadding="5">
+			<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#DDDDDD" />
+		</box>
+	</style>
+
+	<style name="groupL2" style="group" forecolor="#2E4E6F" isBlankWhenNull="true" fontSize="12">
+		<box topPadding="0" bottomPadding="0"/>
+	</style>
+	<style name="groupHeaderL2" style="group" isBlankWhenNull="true">
+		<box topPadding="5" bottomPadding="3">
+			<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#DDDDDD"/>
+		</box>
+	</style>
+	<style name="groupFooterL2" style="groupFooter" isBlankWhenNull="true"/>
+	<style name="groupL3" style="group" forecolor="#333333" isBlankWhenNull="true" fontSize="10">
+		<box topPadding="0" bottomPadding="0"/>
+	</style>
+	<style name="groupHeaderL3" style="group" isBlankWhenNull="true">
+		<box topPadding="0" bottomPadding="0"/>
+	</style>
+	<style name="groupFooterL3" style="groupFooterL2" isBlankWhenNull="true"/>
+
+	<style name="footer" forecolor="#666666" fontSize="12" isBold="true"/>
+
+</jasperTemplate>

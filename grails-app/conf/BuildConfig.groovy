@@ -1,5 +1,5 @@
 grails.useGrails3FolderLayout = true
-grails.plugin.location."view-tools" = "../grails-view-tools"
+//grails.plugin.location."view-tools" = "../grails-view-tools"
 //grails.plugin.location."dynamic-jasper" = "./dynamic-jasper"
 
 grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
@@ -55,14 +55,12 @@ grails.project.dependency.resolution = {
                'jcommon','jfreechart' //<-charts
                 //, 'itext'
         }
-        compile('net.sf.jasperreports:jasperreports:6.3.1')
+        //the DejaVu sans font which is the recomended pacaked font for Jasper reports and pdf exporting
         compile('net.sf.jasperreports:jasperreports-fonts:6.0.0')
+        //compile('net.sf.jasperreports:jasperreports:6.3.1')
+
         //compile("org.eclipse.jdt.core.compiler:ecj:4.3.1")
         build('org.grails:grails-docs:2.5.5') { excludes 'itext' }
-
-        compile('ar.com.fdvs:DynamicJasper:5.0.10'){
-            excludes 'jasperreports'
-        }
 
         compile('net.sourceforge.dynamicreports:dynamicreports-core:4.1.1'){
             excludes 'jasperreports',
@@ -76,12 +74,8 @@ grails.project.dependency.resolution = {
 
     plugins {
 
-        //test()
-        //compile(":plugin-config:0.2.1")
-        //compile(":dynamic-jasper:0.6")
-
         build(":tomcat:7.0.70"){
-            excludes 'ecj'
+            excludes 'ecj' //<-- this needs to be excluded for java 8 and not to conflict with newer one in jasper
             export = false
         }
         compile(":hibernate4:4.3.10") {
@@ -94,7 +88,8 @@ grails.project.dependency.resolution = {
 
         build(":release:3.1.2", ":rest-client-builder:2.1.1") { export = false }
 
-        //compile(":view-tools:0.3-grails2")
+        //provides the LoaderUrlViewResolver for JasperViewLoader
+        compile(":view-tools:0.4-grails2")
     }
 }
 
