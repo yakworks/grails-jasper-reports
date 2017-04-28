@@ -37,11 +37,12 @@ class JasperReportsGrailsPlugin {
     def doWithSpring = {
         //def jconfig = application.mergedConfig.asMap().reporting.jasper
 
+        println "initializing jasper reports plugin"
         jasperViewResourceLocator(grails.plugin.viewtools.ViewResourceLocator) { bean ->
             searchBinaryPlugins = false //whether to look in binary plugins, does not work in grails2
 
             //initial searchLocations
-            searchPaths = null//jconfig.viewResourceLocator.searchPaths
+            searchPaths = []//jconfig.viewResourceLocator.searchPaths
 
             //resourceLoaders beans to use right after searchLocations above are scanned
             //searchLoaders = [ref('tenantViewResourceLoader')]

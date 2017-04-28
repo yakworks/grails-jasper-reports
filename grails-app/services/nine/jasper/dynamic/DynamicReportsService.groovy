@@ -4,7 +4,6 @@ import grails.util.GrailsUtil
 import groovy.util.logging.Slf4j
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder
 import net.sf.dynamicreports.report.builder.HyperLinkBuilder
-import net.sf.dynamicreports.report.builder.ReportTemplateBuilder
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder
 import net.sf.dynamicreports.report.builder.column.Columns
 import net.sf.dynamicreports.report.builder.column.ValueColumnBuilder
@@ -14,12 +13,9 @@ import net.sf.dynamicreports.report.builder.expression.Expressions
 import net.sf.dynamicreports.report.builder.expression.JasperExpression
 import net.sf.dynamicreports.report.builder.group.ColumnGroupBuilder
 import net.sf.dynamicreports.report.builder.group.Groups
-import net.sf.dynamicreports.report.builder.style.StyleBuilder
-import net.sf.dynamicreports.report.builder.style.Styles
 import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder
 import net.sf.dynamicreports.report.builder.subtotal.Subtotals
 import net.sf.dynamicreports.report.constant.GroupHeaderLayout
-import net.sf.dynamicreports.report.constant.HorizontalTextAlignment
 import net.sf.dynamicreports.report.constant.PageOrientation
 import net.sf.dynamicreports.report.constant.PageType
 import nine.reports.DomainMetaUtils
@@ -27,9 +23,6 @@ import nine.reports.FieldMetadata
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import org.codehaus.groovy.grails.commons.GrailsDomainClass
 
-import net.sf.dynamicreports.report.builder.DynamicReports as dr
-
-import static net.sf.dynamicreports.report.builder.DynamicReports.exp
 import static net.sf.dynamicreports.report.builder.DynamicReports.hyperLink
 
 //@Transactional

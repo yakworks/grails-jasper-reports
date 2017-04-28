@@ -349,7 +349,7 @@ class JasperUtils {
         if (reportDataKey && model[reportDataKey]) {
             Object reportDataValue = model.get(reportDataKey);
             if (reportDataValue instanceof DataSource) {
-                return new JRDataSourceJDBC(reportDataValue)
+                return new JRDataSourceJDBC((DataSource)reportDataValue)
             }
             else {
                 return convertReportData(reportDataValue);

@@ -3,7 +3,7 @@ package nine.reports
 /**
  * Stores basic information about a Field (property or column)
  */
-class FieldMetadata implements Serializable{
+class FieldMetadata implements Serializable {
 
     public FieldMetadata(){}
 
