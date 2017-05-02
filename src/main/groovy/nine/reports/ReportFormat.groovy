@@ -33,7 +33,11 @@ enum ReportFormat {
      * valueOf using toString.toUpperCase() of passed object
      */
     public static ReportFormat get(nm) {
-        valueOf(nm.toString().toUpperCase())
+        try {
+            return valueOf(nm.toString().toUpperCase())
+        }catch (IllegalArgumentException e) {
+            return null
+        }
     }
 
     public static List<String> toList() {

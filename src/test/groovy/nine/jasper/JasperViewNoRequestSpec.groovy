@@ -9,6 +9,7 @@ import nine.jasper.spring.JasperViewResolver
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.springframework.web.servlet.View
+import spock.lang.IgnoreRest
 import spock.lang.Specification
 
 /**
@@ -39,7 +40,7 @@ class JasperViewNoRequestSpec extends Specification {
         jasperViewResourceLocator = applicationContext.getBean('jasperViewResourceLocator')
         jasperViewResolver = applicationContext.getBean('jasperViewResolver')
     }
-
+    
     void "format in the model"() {
         when:
         JasperView view = jasperViewResolver.resolveViewName(viewName,null)

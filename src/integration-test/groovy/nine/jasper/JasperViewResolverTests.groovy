@@ -4,7 +4,7 @@ import grails.test.mixin.integration.Integration
 import grails.transaction.Rollback
 import nine.jasper.spring.JasperViewResolver
 import nine.reports.ReportFormat
-import org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest
+import org.grails.web.servlet.mvc.GrailsWebRequest
 import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.mock.web.MockHttpServletResponse
 import spock.lang.Specification

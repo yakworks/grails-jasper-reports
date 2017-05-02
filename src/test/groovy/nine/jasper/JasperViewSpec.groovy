@@ -3,6 +3,7 @@ package nine.jasper
 import grails.plugin.viewtools.ViewResourceLocator
 import grails.test.mixin.TestMixin
 import grails.test.mixin.web.ControllerUnitTestMixin
+import grails.util.BuildSettings
 import nine.jasper.spring.JasperViewResolver
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
@@ -45,7 +46,7 @@ class JasperViewSpec extends Specification {
 
     void "sanity playground"() {
         expect:
-        def abs = GroovyPagesGrailsPlugin.transformToValidLocation(BuildSettingsHolder.settings.baseDir.absolutePath)
+        def abs = GroovyPagesGrailsPlugin.transformToValidLocation(BuildSettings.BASE_DIR.absolutePath)
         def abs2 = new File("").absolutePath
         //assert abs==abs2
         def baseRes =  new UrlResource("file:.")

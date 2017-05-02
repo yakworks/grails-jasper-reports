@@ -14,6 +14,7 @@ class TestAppCtx {
         GroovyPageResourceLoader srl = new GroovyPageResourceLoader(baseResource:baseRes)
         return {
             jasperViewResourceLocator(grails.plugin.viewtools.ViewResourceLocator) { bean ->
+                searchPaths = []
                 searchBinaryPlugins = false //whether to look in binary plugins, does not work in grails2
                 grailsViewPaths = ["/grails-app/views"]
                 webInfPrefix = ""
