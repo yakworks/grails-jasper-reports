@@ -2,7 +2,7 @@ package nine.jasper
 
 import nine.jasper.spring.JasperView
 import nine.jasper.spring.JasperViewResolver
-import org.codehaus.groovy.grails.web.pages.GroovyPageResourceLoader
+import org.grails.gsp.GroovyPageResourceLoader
 import org.springframework.core.io.UrlResource
 
 /**

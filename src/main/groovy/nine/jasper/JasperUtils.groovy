@@ -2,6 +2,7 @@ package nine.jasper
 
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
+import groovy.transform.TypeCheckingMode
 import groovy.util.logging.Slf4j
 import net.sf.jasperreports.engine.*
 import net.sf.jasperreports.engine.data.JRBeanArrayDataSource
@@ -10,12 +11,7 @@ import net.sf.jasperreports.engine.export.HtmlExporter
 import net.sf.jasperreports.engine.export.JRPdfExporter
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter
 import net.sf.jasperreports.engine.util.JRLoader
-import net.sf.jasperreports.export.Exporter
-import net.sf.jasperreports.export.SimpleExporterInput
-import net.sf.jasperreports.export.SimpleHtmlExporterConfiguration
-import net.sf.jasperreports.export.SimpleHtmlExporterOutput
-import net.sf.jasperreports.export.SimpleHtmlReportConfiguration
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput
+import net.sf.jasperreports.export.*
 import nine.reports.ReportFormat
 import org.springframework.context.ApplicationContextException
 import org.springframework.core.io.FileSystemResource
@@ -133,13 +129,13 @@ class JasperUtils {
             return value as JRDataSource
         }
         else if (value instanceof Collection) {
-            return new JRBeanCollectionDataSource((Collection<?>) value);
+            return new JRBeanCollectionDataSource((Collection<?>) value)
         }
         else if (value instanceof Object[]) {
             return new JRBeanArrayDataSource(value);
         }
         else {
-            throw new IllegalArgumentException("Value [" + value + "] cannot be converted to a JRDataSource");
+            throw new IllegalArgumentException("Value [" + value + "] cannot be converted to a JRDataSource")
         }
     }
 
@@ -292,8 +288,7 @@ class JasperUtils {
                     }
 
                 }
-                throw new IllegalArgumentException(
-                        "Report filename [" + filename + "] must end in either .jasper or .jrxml");
+                throw new IllegalArgumentException("Report filename [" + filename + "] must end in either .jasper or .jrxml")
             }
             throw new IllegalArgumentException(
                     "Report [$resource} getFilename can't be null");
@@ -316,6 +311,7 @@ class JasperUtils {
      * @param jasperReport
      * @return Map with keys [name, description, value( default value), type (the valueClass)]
      */
+    @CompileStatic(TypeCheckingMode.SKIP)
     public static List<Map<String,Object>> getPromptingParams(JasperReport jasperReport) {
         JRParameter[] params = jasperReport.getParameters()
         return params.findAll { param ->

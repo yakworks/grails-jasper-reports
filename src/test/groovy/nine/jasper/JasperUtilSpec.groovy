@@ -2,8 +2,10 @@ package nine.jasper
 
 import grails.test.mixin.TestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
-import net.sf.jasperreports.engine.*
-import nine.jasper.JasperUtils
+import net.sf.jasperreports.engine.JasperCompileManager
+import net.sf.jasperreports.engine.JasperFillManager
+import net.sf.jasperreports.engine.JasperPrint
+import net.sf.jasperreports.engine.JasperReport
 import nine.reports.ReportFormat
 import spock.lang.Specification
 
