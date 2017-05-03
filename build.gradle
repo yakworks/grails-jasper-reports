@@ -72,16 +72,19 @@ bootRun {
 // enable if you wish to package this plugin as a standalone application
 bootRepackage.enabled = false
 grailsPublish {
-    // TODO: Provide values here
-    user = 'user'
-    key = 'key'
-    githubSlug = 'foo/bar'
+    user = System.getenv("BINTRAY_USER") ?: project.bintrayUser
+    key = System.getenv("BINTRAY_KEY") ?: project.bintrayKey
+
+    githubSlug = '9ci/grails-jasper-reports'
+
+    title = "Jasper reports Grails Plugin"
+    desc = "Jasper reports Grails Plugin"
+    developers = [joshua:"Joshua B", "snimavat": "Sudhir N"]
+
+    repo = 'grails-plugins'
+    userOrg = '9ci' //the Org to publish this under in
+
     license {
         name = 'Apache-2.0'
     }
-    title = "My Plugin"
-    desc = "Full plugin description"
-    developers = [johndoe:"John Doe"]
-    portalUser = ""
-    portalPassword = ""    
 }
