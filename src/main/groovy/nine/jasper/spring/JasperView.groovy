@@ -18,6 +18,7 @@ package nine.jasper.spring
 
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
+import groovy.util.logging.Slf4j
 import net.sf.jasperreports.engine.JRParameter
 import nine.reports.ReportFormat
 import net.sf.jasperreports.engine.JRAbstractExporter;
@@ -36,6 +37,7 @@ import javax.servlet.http.HttpServletResponse;
  * JasperReports view class that allows for the actual rendering format
  * to be specified at runtime using a parameter contained in the model.
  */
+@Slf4j
 @CompileStatic
 public class JasperView extends AbstractJasperReportsView {
 

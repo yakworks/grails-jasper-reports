@@ -1,16 +1,13 @@
 package nine.reports
 
+import grails.core.GrailsDomainClass
+import grails.core.GrailsDomainClassProperty
 import grails.util.GrailsNameUtils
 import grails.util.Holders
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
-import org.apache.commons.lang.StringUtils
-import org.codehaus.groovy.grails.commons.DomainClassArtefactHandler
-import org.codehaus.groovy.grails.commons.GrailsClassUtils
-import org.codehaus.groovy.grails.commons.GrailsDomainClass
-import org.codehaus.groovy.grails.commons.GrailsDomainClassProperty
 
-import static org.codehaus.groovy.grails.commons.GrailsClassUtils.isAssignableOrConvertibleFrom
+import static grails.util.GrailsClassUtils.isAssignableOrConvertibleFrom
 
 /**
  * tooling methods to retrieve and build meta data for domains to use in reporting

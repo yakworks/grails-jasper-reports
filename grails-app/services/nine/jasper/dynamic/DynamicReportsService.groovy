@@ -1,5 +1,6 @@
 package nine.jasper.dynamic
 
+import grails.core.GrailsApplication
 import grails.util.GrailsUtil
 import groovy.util.logging.Slf4j
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder
@@ -20,8 +21,7 @@ import net.sf.dynamicreports.report.constant.PageOrientation
 import net.sf.dynamicreports.report.constant.PageType
 import nine.reports.DomainMetaUtils
 import nine.reports.FieldMetadata
-import org.codehaus.groovy.grails.commons.GrailsApplication
-import org.codehaus.groovy.grails.commons.GrailsDomainClass
+import grails.core.GrailsDomainClass
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.hyperLink
 

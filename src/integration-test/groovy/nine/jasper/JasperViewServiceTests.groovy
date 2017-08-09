@@ -1,6 +1,12 @@
 package nine.jasper
 
-class JasperViewServiceTests extends GroovyTestCase {
+import grails.test.mixin.integration.Integration
+import grails.transaction.Rollback
+import spock.lang.Specification
+
+@Integration
+@Rollback
+class JasperViewServiceTests extends Specification {
 
     JasperViewService jasperViewService
     def jasperViewResourceLocator

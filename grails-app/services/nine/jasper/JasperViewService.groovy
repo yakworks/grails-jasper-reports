@@ -1,11 +1,10 @@
 package nine.jasper
 
-import grails.plugin.viewtools.GrailsWebEnvironment
+import grails.core.GrailsApplication
 import groovy.transform.CompileStatic
 import nine.jasper.spring.JasperViewResolver
 import nine.jasper.spring.JasperView
-import org.codehaus.groovy.grails.commons.GrailsApplication
-import org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest
+import org.grails.web.servlet.mvc.GrailsWebRequest
 import org.springframework.web.servlet.LocaleResolver
 import org.springframework.web.servlet.View
 
@@ -33,7 +32,7 @@ class JasperViewService {
      * Calls getView to grab the freemarker tempalte and and then passes to render(view,model...)
      */
     Writer render(String viewName , Map model, Writer writer = new CharArrayWriter()){
-        GrailsWebEnvironment.bindRequestIfNull(grailsApplication.mainContext, writer)
+        //GrailsWebEnvironment.bindRequestIfNull(grailsApplication.mainContext, writer) -- xxx why do we need this ?
         JasperView view = (JasperView)jasperViewResolver.resolveViewName( viewName, getLocale())
         if (!view) {
             throw new IllegalArgumentException("The ftl view [${viewName}] could not be found" )
@@ -62,7 +61,7 @@ class JasperViewService {
         Map mergedModel = new HashMap(mapSize)
         mergedModel.putAll(attributesMap)
         if (model)  mergedModel.putAll(model)
-        GrailsWebEnvironment.bindRequestIfNull(grailsApplication.mainContext, writer)
+        ///GrailsWebEnvironment.bindRequestIfNull(grailsApplication.mainContext, writer) XXX why do we need this ?
         //view render
         return writer
 

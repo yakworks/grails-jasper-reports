@@ -2,19 +2,12 @@ package nine.jasper
 
 import grails.plugin.viewtools.ViewResourceLocator
 import grails.test.mixin.TestMixin
-import grails.test.mixin.support.GrailsUnitTestMixin
 import grails.test.mixin.web.ControllerUnitTestMixin
-import grails.util.BuildSettingsHolder
-import grails.util.GrailsWebUtil
-import nine.jasper.spring.JasperView
+import grails.util.BuildSettings
 import nine.jasper.spring.JasperViewResolver
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
-import org.codehaus.groovy.grails.plugins.testing.GrailsMockHttpServletRequest
-import org.codehaus.groovy.grails.plugins.testing.GrailsMockHttpServletResponse
-import org.codehaus.groovy.grails.plugins.web.GroovyPagesGrailsPlugin
-import org.codehaus.groovy.grails.web.pages.GroovyPageResourceLoader
-import org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest
+import org.grails.plugins.web.GroovyPagesGrailsPlugin
 import org.springframework.core.io.Resource
 import org.springframework.core.io.ResourceLoader
 import org.springframework.core.io.UrlResource
@@ -53,7 +46,7 @@ class JasperViewSpec extends Specification {
 
     void "sanity playground"() {
         expect:
-        def abs = GroovyPagesGrailsPlugin.transformToValidLocation(BuildSettingsHolder.settings.baseDir.absolutePath)
+        def abs = GroovyPagesGrailsPlugin.transformToValidLocation(BuildSettings.BASE_DIR.absolutePath)
         def abs2 = new File("").absolutePath
         //assert abs==abs2
         def baseRes =  new UrlResource("file:.")

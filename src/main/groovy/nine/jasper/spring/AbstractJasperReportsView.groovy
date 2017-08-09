@@ -18,26 +18,20 @@ package nine.jasper.spring
 
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
-import net.sf.jasperreports.engine.JRDataSource
-import net.sf.jasperreports.engine.JRException
-import net.sf.jasperreports.engine.JRParameter
-import net.sf.jasperreports.engine.JasperFillManager
-import net.sf.jasperreports.engine.JasperPrint
-import net.sf.jasperreports.engine.JasperReport
+import net.sf.jasperreports.engine.*
 import nine.jasper.JRDataSourceJDBC
-import nine.jasper.JasperUtils;
-import org.springframework.context.ApplicationContextException;
-import org.springframework.context.support.MessageSourceResourceBundle;
-import org.springframework.core.io.Resource;
-import org.springframework.ui.jasperreports.JasperReportsUtils;
-import org.springframework.util.CollectionUtils;
-import org.springframework.web.servlet.support.RequestContext;
-import org.springframework.web.servlet.view.AbstractUrlBasedView;
+import nine.jasper.JasperUtils
+import org.springframework.context.ApplicationContextException
+import org.springframework.context.support.MessageSourceResourceBundle
+import org.springframework.core.io.Resource
+import org.springframework.ui.jasperreports.JasperReportsUtils
+import org.springframework.util.CollectionUtils
+import org.springframework.web.servlet.support.RequestContext
+import org.springframework.web.servlet.view.AbstractUrlBasedView
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
-import java.util.*;
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
+import javax.sql.DataSource
 
 /**
  * Base class for all JasperReports views. Applies on-the-fly compilation

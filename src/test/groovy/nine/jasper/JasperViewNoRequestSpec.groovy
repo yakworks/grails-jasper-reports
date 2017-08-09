@@ -3,22 +3,13 @@ package nine.jasper
 import grails.plugin.viewtools.ViewResourceLocator
 import grails.test.mixin.TestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
-import grails.util.BuildSettingsHolder
-import grails.util.GrailsWebUtil
 import jrsamples.datasource.CustomBeanFactory
-import net.sf.jasperreports.engine.JRParameter
 import nine.jasper.spring.JasperView
 import nine.jasper.spring.JasperViewResolver
-import org.apache.poi.xssf.usermodel.*
-import org.codehaus.groovy.grails.plugins.testing.GrailsMockHttpServletRequest
-import org.codehaus.groovy.grails.plugins.testing.GrailsMockHttpServletResponse
-import org.codehaus.groovy.grails.plugins.web.GroovyPagesGrailsPlugin
-import org.codehaus.groovy.grails.web.pages.GroovyPageResourceLoader
-import org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest
-import org.springframework.core.io.Resource
-import org.springframework.core.io.ResourceLoader
-import org.springframework.core.io.UrlResource
+import org.apache.poi.xssf.usermodel.XSSFSheet
+import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.springframework.web.servlet.View
+import spock.lang.IgnoreRest
 import spock.lang.Specification
 
 /**

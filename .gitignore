@@ -89,6 +89,7 @@ local.properties
 .settings/
 .loadpath
 .grails/*
+build/*
 
 # Eclipse Core
 .project

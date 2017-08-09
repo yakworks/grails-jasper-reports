@@ -1,4 +1,5 @@
 package jrsamples.datasource
+
 import grails.test.mixin.TestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
 import groovy.transform.CompileStatic
