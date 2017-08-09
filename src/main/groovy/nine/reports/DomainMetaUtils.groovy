@@ -18,6 +18,8 @@ import static org.codehaus.groovy.grails.commons.GrailsClassUtils.isAssignableOr
  * @author Joshua Burnett
  */
 //FIXME this should be merged in with the BeanPathTools in angle-grinder and moved to the DAO plugin
+//FIXME for Grails 3 see this commit to more to PersitentEntity instead of GrailsDomainClass
+//https://github.com/grails/grails-core/commit/d3cbd999010666bfd956068e826676632ae3fa17
 @CompileStatic
 class DomainMetaUtils {
 

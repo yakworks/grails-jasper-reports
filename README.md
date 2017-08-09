@@ -1,10 +1,11 @@
 ## Table of Contents
 <!-- this is using the Sublime MarkdownTOC plugin to auto update it -->
-<!-- MarkdownTOC autolink="true" bracket="round" depth="2" style="unordered" indent="  " autoanchor="false" -->
+<!-- MarkdownTOC autolink="true" bracket="round" depth="3" style="unordered" indent="  " autoanchor="false" -->
 
 - [Summary](#summary)
 - [Quick Start](#quick-start)
 - [Usage](#usage)
+  - [How-TO](#how-to)
 - [Services](#services)
 - [Configuration](#configuration)
 - [Logging](#logging)
@@ -40,6 +41,8 @@ Use your browser to navigate to [http://localhost:8080/yourApp/demo]()
 Done!
 
 ## Usage
+
+### How-TO
 
 ## Services
 
