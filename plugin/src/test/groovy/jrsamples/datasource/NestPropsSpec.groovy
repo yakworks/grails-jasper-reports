@@ -30,12 +30,6 @@ import net.sf.jasperreports.engine.data.JRMapCollectionDataSource
 @TestMixin(GrailsUnitTestMixin)
 class NestPropsSpec extends Specification {
 
-    def setup() {
-    }
-
-    def cleanup() {
-    }
-
     void "test this"() {
     	expect:
         runReport()
@@ -62,7 +56,8 @@ class NestPropsSpec extends Specification {
         long start = System.currentTimeMillis();
         //Preparing parameters
         Map parameters = ["ReportTitle":"NestProps Report", "DataFile": "CustomBeanFactory.listMap"]
-        new File("target/jasper/").mkdir()
+        new File("target/jasper/").mkdirs()
+        assert(new File("target/jasper/")).exists()
         JasperFillManager.fillReportToFile(
                 jreport, "target/jasper/NestProps.jrprint",
                 parameters,ds);
