@@ -6,13 +6,11 @@ import nine.jasper.spring.JasperViewResolver
 
 class JasperReportsGrailsPlugin extends Plugin {
 
-	def version       = "0.3-SNAPSHOT"
-	def grailsVersion = "3.2.0 > *"
 	def profiles 	  = ['web']
 
 	def title         = "Jasper Reports Plugin"
-	def description	  = 'The Grails FreeMarker plugin provides support for rendering FreeMarker templates as views.'
-	def documentation = "https://github.com/9ci/grails-jasper-reports"
+	def description	  = 'Jasper Reports Plugin'
+	def documentation = "https://github.com/yakwroks/grails-jasper-reports"
 	def observe		  = ["controllers", 'groovyPages','viewTools']
 	def loadAfter	  = ['controllers', 'groovyPages','viewTools']
 

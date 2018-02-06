@@ -29,7 +29,7 @@ class JasperViewService {
     }
 
     /**
-     * Calls getView to grab the freemarker tempalte and and then passes to render(view,model...)
+     * Calls getView to grab the jasper template and and then passes to render(view,model...)
      */
     Writer render(String viewName , Map model, Writer writer = new CharArrayWriter()){
         //GrailsWebEnvironment.bindRequestIfNull(grailsApplication.mainContext, writer) -- xxx why do we need this ?
@@ -41,10 +41,10 @@ class JasperViewService {
     }
 
     /**
-     * processes the freemarker template in the View.
+     * processes the jasper report template in the View.
      * sets the plugin thread local if passed in and bind a request if none exists before processing.
      *
-     * @param view  the GrailsFreeMarkerView/FreeMarkerView that holds the template
+     * @param view  JasperView that holds the template
      * @param model the hash model the should be passed into the freemarker tempalate
      * @param writer (optional) a writer if you have one. a CharArrayWriter will be created by default.
      * @return the writer that was passed in.

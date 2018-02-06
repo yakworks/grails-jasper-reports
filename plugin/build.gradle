@@ -24,7 +24,7 @@ dependencies {
         exclude module: 'batik-bridge' //don't need the barcode stuff
     }
 
-    compile 'org.grails.plugins:view-tools:0.6-grails3'
+    compile 'org.grails.plugins:view-tools:0.10-SNAPSHOT'
     testCompile "org.grails:grails-plugin-testing"
 }
 
