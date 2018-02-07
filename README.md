@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/yakworks/grails-jasper-reports.svg?branch=master)](https://travis-ci.org/yakworks/grails-jasper-reports)
+
 ## Table of Contents
 <!-- this is using the Sublime MarkdownTOC plugin to auto update it -->
 <!-- MarkdownTOC autolink="true" bracket="round" depth="3" style="unordered" indent="  " autoanchor="false" -->
