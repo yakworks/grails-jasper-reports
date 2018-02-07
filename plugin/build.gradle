@@ -14,7 +14,11 @@ dependencies {
         exclude module:'olap4j'
         exclude module:'jcommon'
         exclude module: 'jfreechart' //<-charts
+        exclude module: 'itext' //exclude itext:2.1.7js5 which is not available in jcenter or maven central
     }
+
+    compile group: 'com.lowagie', name: 'itext', version: '2.1.7'
+
     //the DejaVu sans font which is the recomended pacaked font for Jasper reports and pdf exporting
     compile('net.sf.jasperreports:jasperreports-fonts:6.0.0')
 
