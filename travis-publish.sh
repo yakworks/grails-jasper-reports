@@ -2,7 +2,7 @@
 
 set -e
 
-if [[ -n $TRAVIS_TAG ]] || [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_REPO_SLUG == "yakworks/view-tools" && $TRAVIS_PULL_REQUEST == 'false' ]]; then
+if [[ -n $TRAVIS_TAG ]] || [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_REPO_SLUG == "yakworks/grails-jasper-reports" && $TRAVIS_PULL_REQUEST == 'false' ]]; then
 
     if [[ -n $TRAVIS_TAG ]]
     then
