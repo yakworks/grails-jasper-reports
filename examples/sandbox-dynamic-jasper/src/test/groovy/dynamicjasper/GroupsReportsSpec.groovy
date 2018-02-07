@@ -22,6 +22,7 @@ import grails.test.mixin.TestMixin
 import grails.test.mixin.web.ControllerUnitTestMixin
 import groovy.util.logging.Slf4j
 import net.sf.jasperreports.engine.JRDataSource
+import net.sf.jasperreports.engine.JRPropertiesUtil
 import net.sf.jasperreports.engine.JasperFillManager
 import net.sf.jasperreports.engine.JasperPrint
 import net.sf.jasperreports.engine.JasperReport
@@ -284,6 +285,7 @@ class GroupsReportsSpec extends Specification {
         drb.addAutoText(AutoText.AUTOTEXT_PAGE_X_SLASH_Y, AutoText.POSITION_FOOTER, AutoText.ALIGNMENT_RIGHT);
 
         DynamicReport dr = drb.build();
+        dr.setProperty('net.sf.jasperreports.awt.ignore.missing.font', 'true')
 
         return dr;
     }
