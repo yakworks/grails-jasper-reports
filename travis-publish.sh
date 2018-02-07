@@ -7,45 +7,10 @@ if [[ -n $TRAVIS_TAG ]] || [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_REPO_SLUG ==
     if [[ -n $TRAVIS_TAG ]]
     then
         echo "### publishing release to BinTray"
-        ./gradlew view-tools:bintrayUpload --no-daemon
+        ./gradlew jasper-reports:bintrayUpload --no-daemon
     else
          echo "### publishing snapshot"
-        ./gradlew view-tools:publish --no-daemon
-    fi
-
-    if [[ $TRAVIS_BRANCH == 'master' ]]
-    then
-
-        echo "### publishing docs"
-        git config --global user.name "9cibot"
-        git config --global user.email "9cibot@9ci.com"
-        git config --global credential.helper "store --file=~/.git-credentials"
-        echo "https://$GITHUB_TOKEN:@github.com" > ~/.git-credentials
-        git clone https://${GITHUB_TOKEN}@github.com/yakworks/view-tools.git -b gh-pages gh-pages --single-branch > /dev/null
-
-        python3 -m mkdocs build
-
-        cd gh-pages
-        cp -r ../site/. . #Copy Mkdocs
-
-        mkdir -p api #Copy Java API
-        cp -r ../plugin/build/docs/groovydoc/. ./api
-
-        git add .
-
-        #If there are any changes, do commit and push
-        if [[ -n $(git status -s) ]]
-        then
-            git commit -a -m "Update docs for Travis build: https://travis-ci.org/$TRAVIS_REPO_SLUG/builds/$TRAVIS_BUILD_ID"
-            git push origin HEAD
-        else
-            echo "### No changes to docs"
-        fi
-
-        cd ..
-        rm -rf gh-pages
-        rm -rf site
-        echo "### Done publishing docs"
+        ./gradlew jasper-reports:publish --no-daemon
     fi
 
 else
