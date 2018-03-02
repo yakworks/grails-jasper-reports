@@ -318,9 +318,9 @@ class JasperUtils {
      */
     public static List<Map<String,Object>> getPromptingParams(JasperReport jasperReport) {
         JRParameter[] params = jasperReport.getParameters()
-        return params.findAll { param ->
+        return params.findAll { JRParameter param ->
             !param.systemDefined && param.forPrompting
-        }.collect { param ->
+        }.collect { JRParameter param ->
             [
                 name: param.name,
                 description: param.description ?: StringUtils.capitalize(param.name),
@@ -329,7 +329,7 @@ class JasperUtils {
                 valueClass: param.valueClass,
                 valueClassName: param.valueClassName
             ]
-        }
+        } as List<Map<String,Object>>
     }
 
     /**
