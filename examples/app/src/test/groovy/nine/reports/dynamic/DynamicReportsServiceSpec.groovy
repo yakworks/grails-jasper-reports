@@ -4,24 +4,20 @@ import foo.Bills
 import foo.Customer
 import foo.Product
 import foo.ProductGroup
-import grails.test.mixin.TestMixin
-import grails.test.mixin.gorm.Domain
-import grails.test.mixin.hibernate.HibernateTestMixin
+import grails.test.hibernate.HibernateSpec
+import grails.testing.gorm.DataTest
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder
 import nine.jasper.dynamic.DynamicReportsService
 import nine.reports.DomainMetaUtils
 import nine.reports.SeedData
 import spock.lang.Shared
-import spock.lang.Specification
 
-import static net.sf.dynamicreports.report.builder.DynamicReports.*
+import static net.sf.dynamicreports.report.builder.DynamicReports.export
 
-//@TestMixin(GrailsUnitTestMixin)
-@Domain([ProductGroup,Bills,Customer,Product])
-@TestMixin(HibernateTestMixin)
-//@TestMixin(ControllerUnitTestMixin)
-//@Mock([ProductGroup,Bills,Customer,Product])
-class DynamicReportsServiceSpec extends Specification {
+//@Domain([ProductGroup,Bills,Customer,Product])
+class DynamicReportsServiceSpec extends HibernateSpec implements DataTest {
+
+    List<Class> getDomainClasses() { [ProductGroup,Bills,Customer,Product] }
 
     @Shared
     DynamicReportsService dynamicReportsService = new DynamicReportsService()
@@ -38,6 +34,8 @@ class DynamicReportsServiceSpec extends Specification {
     static folder = new File("target/reports/DynamicReportsServiceSpec/");
 
     void setupSpec(){
+        mockDomains(ProductGroup,Bills,Customer,Product)
+
         dynamicReportsService = new DynamicReportsService()
         dynamicReportsService.grailsApplication = grailsApplication
         if(!folder.exists()) folder.mkdirs();
@@ -78,7 +76,7 @@ class DynamicReportsServiceSpec extends Specification {
         when:
         Map cfg =  [
             domain:'Bills',
-            fields: ['customer.name','product.group.name', 'color','product.name','isPaid', 'tranProp', 'tranDate', 'qty', 'amount'],
+            fields: ['customer.name','product.group.name', 'color','product.name','isPaid', 'tranDate', 'qty', 'amount'],
             columns:['tranProp':'From Getter'],
             groups: ['customer.name', 'product.group.name','color'],
             subtotals: [qty:"sum", amount:"sum"], //put these on all the group summaries

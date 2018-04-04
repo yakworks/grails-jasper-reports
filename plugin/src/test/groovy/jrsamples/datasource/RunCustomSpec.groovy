@@ -1,43 +1,22 @@
 package jrsamples.datasource
 
-import grails.test.mixin.TestMixin
-import grails.test.mixin.support.GrailsUnitTestMixin
-import groovy.transform.CompileStatic
-import jrsamples.datasource.CustomBeanFactory
-import net.sf.jasperreports.engine.JRDataSource
-import net.sf.jasperreports.engine.JRException
-import net.sf.jasperreports.engine.JasperCompileManager
-import net.sf.jasperreports.engine.JasperExportManager
-import net.sf.jasperreports.engine.JasperFillManager
-import net.sf.jasperreports.engine.JasperPrint
-import net.sf.jasperreports.engine.JasperPrintManager
-import net.sf.jasperreports.engine.JasperReport
+import net.sf.jasperreports.engine.*
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
 import net.sf.jasperreports.engine.design.JasperDesign
+import net.sf.jasperreports.engine.export.HtmlExporter
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter
 import net.sf.jasperreports.engine.util.JRLoader
 import net.sf.jasperreports.engine.xml.JRXmlLoader
-import net.sf.jasperreports.export.SimpleExporterInput
-import net.sf.jasperreports.export.SimpleHtmlExporterConfiguration
-import net.sf.jasperreports.export.SimpleHtmlExporterOutput
-import net.sf.jasperreports.export.SimpleHtmlReportConfiguration
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput
+import net.sf.jasperreports.export.*
+import org.grails.testing.GrailsUnitTest
 import org.springframework.core.io.FileSystemResource
 import spock.lang.Specification
-import net.sf.jasperreports.engine.JRParameter
-import net.sf.jasperreports.engine.export.*
 
 /**
  * more or less gets the sample going as is from jaspers /datasource example
  */
-@TestMixin(GrailsUnitTestMixin)
-class RunCustomSpec extends Specification {
+class RunCustomSpec extends Specification implements GrailsUnitTest{
 
-    def setup() {
-    }
-
-    def cleanup() {
-    }
 
     void "test something"() {
     	expect:

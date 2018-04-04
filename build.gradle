@@ -72,6 +72,11 @@ subprojects {
 		testCompile "org.grails:grails-plugin-testing"
 	}
 
+	dependencies {
+		testCompile "org.grails:grails-gorm-testing-support:1.1.4"
+		testCompile "org.grails:grails-web-testing-support:1.1.4"
+	}
+
 	if (isGrailsPlugin) {
 		group "org.grails.plugins"
 		apply from: "${commonBuild}/common-publishing.gradle"

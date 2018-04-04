@@ -2,6 +2,7 @@ package nine.jasper
 
 import grails.core.GrailsApplication
 import groovy.transform.CompileStatic
+import groovy.util.logging.Slf4j
 import nine.jasper.spring.JasperViewResolver
 import nine.jasper.spring.JasperView
 import org.grails.web.servlet.mvc.GrailsWebRequest
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.View
  * @author Joshua Burnett
  */
 @CompileStatic
+@Slf4j
 class JasperViewService {
 
     static transactional = false

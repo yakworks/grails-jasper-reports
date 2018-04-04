@@ -1,8 +1,7 @@
 package nine.jasper
 
 import grails.plugin.viewtools.ViewResourceLocator
-import grails.test.mixin.TestMixin
-import grails.test.mixin.web.ControllerUnitTestMixin
+import grails.testing.web.GrailsWebUnitTest
 import grails.util.BuildSettings
 import nine.jasper.spring.JasperViewResolver
 import org.apache.poi.xssf.usermodel.XSSFSheet
@@ -17,11 +16,11 @@ import spock.lang.Specification
 /**
  * Playground for various features.
  */
-//@TestMixin(GrailsUnitTestMixin)
-@TestMixin(ControllerUnitTestMixin)
-class JasperViewSpec extends Specification {
+class JasperViewSpec extends Specification implements GrailsWebUnitTest {
 
-    def doWithSpring =  TestAppCtx.doWithSpring
+    Closure doWithSpring() {
+      return TestAppCtx.doWithSpring
+    }
 
     ViewResourceLocator jasperViewResourceLocator //= ViewResourceLocator.mockForTest()
     JasperViewResolver jasperViewResolver

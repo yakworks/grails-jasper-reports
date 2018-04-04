@@ -1,11 +1,12 @@
 package nine.reports
 
-import grails.core.GrailsDomainClass
-import grails.core.GrailsDomainClassProperty
 import grails.util.GrailsNameUtils
 import grails.util.Holders
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
+import org.grails.datastore.mapping.model.PersistentEntity
+import org.grails.datastore.mapping.model.PersistentProperty
+import org.grails.datastore.mapping.model.types.Association
 
 import static grails.util.GrailsClassUtils.isAssignableOrConvertibleFrom
 
@@ -32,13 +33,17 @@ class DomainMetaUtils {
      * @return
      */
     @CompileDynamic
-    static Map<String,FieldMetadata> getFieldMetadata(GrailsDomainClass domainClass, List<String> fields, Map columnTitles = null) {
+    static Map<String,FieldMetadata> getFieldMetadata(PersistentEntity domainClass, List<String> fields, Map columnTitles = null) {
         Map<String,FieldMetadata> columns = [:]
         fields.each { propertyName ->
             //Map colProps = [fieldName:propertyName]
             FieldMetadata fld = new FieldMetadata(propertyName)
 
-            GrailsDomainClassProperty property = domainClass.getPropertyByName(propertyName)
+            PersistentProperty property = getPropertyByName(domainClass, propertyName)
+
+            if(!property) {
+                throw new RuntimeException("Invalid property name $propertyName for domain $domainClass.name")
+            }
 
             Class dcPropType = property.type
             Class propertyType
@@ -85,16 +90,39 @@ class DomainMetaUtils {
      * @return
      */
     @CompileDynamic
-    static GrailsDomainClass findDomainClass(String name){
+    static PersistentEntity findDomainClass(String name){
+
         if(name.indexOf('.') == -1){
-            return Holders.grailsApplication.domainClasses.find {
-                it.clazz.simpleName.toLowerCase() == name.toLowerCase()
-            }
+            String propertyName = GrailsNameUtils.getPropertyName(name)
+            Holders.grailsApplication.mappingContext.persistentEntities.find({
+                it.decapitalizedName == propertyName
+            })
         }else{
-            return Holders.grailsApplication.getDomainClass(name)
+            return Holders.grailsApplication.mappingContext.getPersistentEntity(name)
         }
 
     }
+
+    //See https://github.com/grails/grails-core/issues/10978
+    static PersistentProperty getPropertyByName(PersistentEntity entity, String name) {
+        if(name != null && name.contains(".")) {
+            int indexOfDot = name.indexOf('.')
+            String basePropertyName = name.substring(0, indexOfDot)
+            PersistentProperty property = entity.getPropertyByName(basePropertyName)
+            if(property instanceof Association) {
+                PersistentEntity association = ((Association)property).getAssociatedEntity()
+                String restOfPropertyName = name.substring(indexOfDot + 1)
+                return getPropertyByName(association, restOfPropertyName)
+            }
+            else {
+                throw new RuntimeException("Property $basePropertyName of class $entity.javaClass.name is not an association")
+            }
+
+        } else {
+            return entity.getPropertyByName(name)
+        }
+    }
+
 
     /**
      * Converts a property name into its natural title equivalent eg ('firstName' becomes 'First Name')

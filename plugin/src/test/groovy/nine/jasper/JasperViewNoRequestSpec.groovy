@@ -1,24 +1,21 @@
 package nine.jasper
 
 import grails.plugin.viewtools.ViewResourceLocator
-import grails.test.mixin.TestMixin
-import grails.test.mixin.support.GrailsUnitTestMixin
 import jrsamples.datasource.CustomBeanFactory
 import nine.jasper.spring.JasperView
 import nine.jasper.spring.JasperViewResolver
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import org.grails.testing.GrailsUnitTest
 import org.springframework.web.servlet.View
-import spock.lang.IgnoreRest
 import spock.lang.Specification
 
 /**
  * Playground for various features.
  */
-@TestMixin(GrailsUnitTestMixin)
-class JasperViewNoRequestSpec extends Specification {
+class JasperViewNoRequestSpec extends Specification implements GrailsUnitTest {
 
-    def doWithSpring = TestAppCtx.doWithSpring
+    Closure doWithSpring() { return TestAppCtx.doWithSpring }
 
     ViewResourceLocator jasperViewResourceLocator //= ViewResourceLocator.mockForTest()
     JasperViewResolver jasperViewResolver

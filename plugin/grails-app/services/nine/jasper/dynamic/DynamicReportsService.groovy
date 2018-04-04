@@ -2,6 +2,7 @@ package nine.jasper.dynamic
 
 import grails.core.GrailsApplication
 import grails.util.GrailsUtil
+import groovy.transform.CompileDynamic
 import groovy.util.logging.Slf4j
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder
 import net.sf.dynamicreports.report.builder.HyperLinkBuilder
@@ -21,25 +22,24 @@ import net.sf.dynamicreports.report.constant.PageOrientation
 import net.sf.dynamicreports.report.constant.PageType
 import nine.reports.DomainMetaUtils
 import nine.reports.FieldMetadata
-import grails.core.GrailsDomainClass
+import org.grails.datastore.mapping.model.PersistentEntity
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.hyperLink
 
-//@Transactional
 @Slf4j
-//@CompileStatic
+@CompileDynamic
 class DynamicReportsService {
     static transactional = false
 
     GrailsApplication grailsApplication
 
     JasperReportBuilder buildDynamicReport(Map reportCfg){
-        GrailsDomainClass domainClass = DomainMetaUtils.findDomainClass(reportCfg.domain)
+        PersistentEntity domainClass = DomainMetaUtils.findDomainClass(reportCfg.domain)
         //TODO blow logical error here is domainClass can't be found
 
         buildDynamicReport(domainClass, reportCfg)
     }
-    JasperReportBuilder buildDynamicReport(GrailsDomainClass domainClass, Map reportCfg, Map params = null) {
+    JasperReportBuilder buildDynamicReport(PersistentEntity domainClass, Map reportCfg, Map params = null) {
         println "doReport with $params"
 
         //TODO do some basic validation on reportCfg. maybe even setup domains for them
@@ -96,16 +96,16 @@ class DynamicReportsService {
     }
 
 
-    Collection<?> createDataSource(GrailsDomainClass domainClass, List groupFields) {
+    Collection<?> createDataSource(PersistentEntity domainClass, List groupFields) {
         List results
         if (groupFields) {
-            def c = domainClass.clazz.createCriteria()
+            def c = domainClass.javaClass.createCriteria()
             results = c.list{
                 orderNested(groupFields).call()
             }
             //recs = domainClass.clazz.findAll("from $domainClass.clazz.name as s order by ${groupFields.join(',')}")
         } else {
-            results = domainClass.clazz.list()
+            results = domainClass.javaClass.list()
         }
         return results
 

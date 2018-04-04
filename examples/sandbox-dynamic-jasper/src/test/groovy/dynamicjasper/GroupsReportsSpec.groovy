@@ -16,13 +16,13 @@ import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn
 import ar.com.fdvs.dj.util.SortUtils
 import domain.Product
 import domain.TestRepositoryProducts
+import foo.ReportsController
 import grails.converters.JSON
 import grails.plugin.viewtools.ViewResourceLocator
-import grails.test.mixin.TestMixin
-import grails.test.mixin.web.ControllerUnitTestMixin
+import grails.testing.spring.AutowiredTest
+import grails.testing.web.controllers.ControllerUnitTest
 import groovy.util.logging.Slf4j
 import net.sf.jasperreports.engine.JRDataSource
-import net.sf.jasperreports.engine.JRPropertiesUtil
 import net.sf.jasperreports.engine.JasperFillManager
 import net.sf.jasperreports.engine.JasperPrint
 import net.sf.jasperreports.engine.JasperReport
@@ -31,18 +31,17 @@ import nine.jasper.JasperUtils
 import nine.jasper.spring.JasperViewResolver
 import spock.lang.Specification
 
-import java.awt.*
-import java.util.List
+import java.awt.Color
 
 /**
  * Playground for various features.
  */
 @Slf4j
-//@TestMixin(GrailsUnitTestMixin)
-@TestMixin(ControllerUnitTestMixin)
-class GroupsReportsSpec extends Specification {
+class GroupsReportsSpec extends Specification implements ControllerUnitTest<ReportsController>,AutowiredTest {
 
-    def doWithSpring = TestAppCtx.doWithSpring
+    Closure doWithSpring() {
+        return TestAppCtx.doWithSpring
+    }
 
     ViewResourceLocator jasperViewResourceLocator //= ViewResourceLocator.mockForTest()
     JasperViewResolver jasperViewResolver
@@ -58,7 +57,7 @@ class GroupsReportsSpec extends Specification {
 
     JasperPrint jp;
     JasperReport jr;
-    Map params = new HashMap();
+    Map rparams = new HashMap();
     DynamicReport dr;
 
    // Map parameters = ["ReportTitle":"Test Report", "DataFile": "Foo"]
@@ -93,7 +92,7 @@ class GroupsReportsSpec extends Specification {
          * the DynamicReport, a new ClassicLayoutManager instance (this
          * one does the magic) and the JRDataSource
          */
-        jr = DynamicJasperHelper.generateJasperReport(dr, new ClassicLayoutManager(), params);
+        jr = DynamicJasperHelper.generateJasperReport(dr, new ClassicLayoutManager(), rparams);
 
         /**
          * Creates the JasperPrint object, we pass as a Parameter
@@ -101,9 +100,9 @@ class GroupsReportsSpec extends Specification {
          */
 
         if (ds != null)
-            jp = JasperFillManager.fillReport(jr, params, ds);
+            jp = JasperFillManager.fillReport(jr, rparams, ds);
         else
-            jp = JasperFillManager.fillReport(jr, params);
+            jp = JasperFillManager.fillReport(jr, rparams);
 
 
         exportReport();
@@ -123,7 +122,7 @@ class GroupsReportsSpec extends Specification {
             DynamicJasperHelper.generateJRXML(this.jr, "UTF-8","target/dynamic/" + this.getClass().getSimpleName() + ".jrxml");
 
         } else {
-            DynamicJasperHelper.generateJRXML(this.dr, new ClassicLayoutManager(), this.params, "UTF-8","target/dynamic/" + this.getClass().getSimpleName() + ".jrxml");
+            DynamicJasperHelper.generateJRXML(this.dr, new ClassicLayoutManager(), this.rparams, "UTF-8","target/dynamic/" + this.getClass().getSimpleName() + ".jrxml");
         }
     }
 

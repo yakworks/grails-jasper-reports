@@ -1,19 +1,17 @@
 package nine.jasper
 
-import grails.test.mixin.TestMixin
-import grails.test.mixin.support.GrailsUnitTestMixin
 import net.sf.jasperreports.engine.JasperCompileManager
 import net.sf.jasperreports.engine.JasperFillManager
 import net.sf.jasperreports.engine.JasperPrint
 import net.sf.jasperreports.engine.JasperReport
 import nine.reports.ReportFormat
+import org.grails.testing.GrailsUnitTest
 import spock.lang.Specification
 
 /**
  * Playground for various features.
  */
-@TestMixin(GrailsUnitTestMixin)
-class JasperUtilSpec extends Specification {
+class JasperUtilSpec extends Specification implements GrailsUnitTest {
 
     def setup() {
     }

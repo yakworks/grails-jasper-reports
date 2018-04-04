@@ -1,34 +1,18 @@
 package jrsamples.datasource
 
-import grails.test.mixin.TestMixin
-import grails.test.mixin.support.GrailsUnitTestMixin
-import jrsamples.datasource.CustomBeanFactory
-import net.sf.jasperreports.engine.JRDataSource
-import net.sf.jasperreports.engine.JRException
-import net.sf.jasperreports.engine.JasperCompileManager
-import net.sf.jasperreports.engine.JasperExportManager
-import net.sf.jasperreports.engine.JasperFillManager
-import net.sf.jasperreports.engine.JasperPrint
-import net.sf.jasperreports.engine.JasperPrintManager
-import net.sf.jasperreports.engine.JasperReport
+import net.sf.jasperreports.engine.*
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
-import net.sf.jasperreports.engine.design.JasperDesign
 import net.sf.jasperreports.engine.export.JRXhtmlExporter
-import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter
 import net.sf.jasperreports.engine.util.JRLoader
-import net.sf.jasperreports.engine.xml.JRXmlLoader
 import net.sf.jasperreports.export.SimpleExporterInput
 import net.sf.jasperreports.export.SimpleHtmlExporterOutput
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput
-import org.springframework.core.io.FileSystemResource
+import org.grails.testing.GrailsUnitTest
 import spock.lang.Specification
-import net.sf.jasperreports.engine.data.JRMapCollectionDataSource
 
 /**
  * Playground for various features.
  */
-@TestMixin(GrailsUnitTestMixin)
-class NestPropsSpec extends Specification {
+class NestPropsSpec extends Specification implements GrailsUnitTest {
 
     void "test this"() {
     	expect:

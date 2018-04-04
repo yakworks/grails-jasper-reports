@@ -9,10 +9,10 @@ import org.springframework.core.io.UrlResource
  * Created by basejump on 10/14/16.
  */
 class TestAppCtx {
-    static Closure getDoWithSpring() {
+    static Closure doWithSpring = {
         def baseRes =  new UrlResource("file:.")// as Resource
         GroovyPageResourceLoader srl = new GroovyPageResourceLoader(baseResource:baseRes)
-        return {
+
             jasperViewResourceLocator(grails.plugin.viewtools.ViewResourceLocator) { bean ->
                 searchPaths = []
                 searchBinaryPlugins = false //whether to look in binary plugins, does not work in grails2
@@ -30,7 +30,7 @@ class TestAppCtx {
                 viewClass = JasperView.class
                 order = 10
                 cache = false
-            }
+
         }
     }
 }

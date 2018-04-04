@@ -4,31 +4,23 @@ import foo.Bills
 import foo.Customer
 import foo.Product
 import foo.ProductGroup
-import grails.core.GrailsDomainClass
-import grails.test.mixin.Mock
-import grails.test.mixin.TestMixin
-import grails.test.mixin.web.ControllerUnitTestMixin
+import grails.testing.gorm.DataTest
+import grails.testing.web.GrailsWebUnitTest
+import org.grails.datastore.mapping.model.PersistentEntity
 import spock.lang.Specification
 
-//@TestMixin(GrailsUnitTestMixin)
-@TestMixin(ControllerUnitTestMixin)
-@Mock([ProductGroup,Bills,Customer,Product])
-class DomainMetaUtilsSpec extends Specification {
+class DomainMetaUtilsSpec extends Specification implements DataTest, GrailsWebUnitTest {
 
-//    void setup(){
-//
-//    }
+    void setupSpec(){
+        mockDomains(ProductGroup,Bills,Customer,Product)
+    }
+
     void "buildColumnMap works for Bills"() {
         when:
         def fooGrp = new ProductGroup(name:"Foo Group").save()
         assert ProductGroup.get(1).name == "Foo Group"
-//        assert fooGrp.getDomainClass()
-        grailsApplication.domainClasses.each {
-            println it.name
-        }
-        println Bills.name
-        assert grailsApplication.getDomainClass(ProductGroup.name)
-        def domainClass = grailsApplication.getDomainClass(ProductGroup.name)
+        assert grailsApplication.mappingContext.getPersistentEntity(ProductGroup.name)
+        def domainClass = grailsApplication.mappingContext.getPersistentEntity(ProductGroup.name)
         assert domainClass
         def colmap = DomainMetaUtils.getFieldMetadata(domainClass, ['name'])
 
@@ -38,11 +30,14 @@ class DomainMetaUtilsSpec extends Specification {
 
     void "buildColumnMap works with config on Bills and nested properties"() {
         given:
-        GrailsDomainClass domainClass = grailsApplication.getDomainClass(Bills.name)
+        PersistentEntity domainClass = grailsApplication.mappingContext.getPersistentEntity(Bills.name)
         def fields = ['customer.name','product.group.name', 'color', 'product.name', 'qty', 'amount']
 
         Map cfg = ['product.name':'Flubber']
         String foo = ""
+
+        expect:
+        domainClass != null
 
         when:
 
@@ -67,8 +62,8 @@ class DomainMetaUtilsSpec extends Specification {
 
     void "findDomainClass"() {
         expect:
-        grailsApplication.getDomainClass(Bills.name)
-        grailsApplication.getDomainClass("foo.Bills")
+        grailsApplication.mappingContext.getPersistentEntity(Bills.name)
+        grailsApplication.mappingContext.getPersistentEntity("foo.Bills")
         DomainMetaUtils.findDomainClass("foo.Bills")
         DomainMetaUtils.findDomainClass("Bills")
         DomainMetaUtils.findDomainClass("bills")
