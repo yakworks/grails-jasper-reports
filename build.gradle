@@ -70,20 +70,20 @@ subprojects {
 		runtime "com.h2database:h2"
 
 		testCompile "org.grails:grails-plugin-testing"
-	}
 
-	dependencies {
 		testCompile "org.grails:grails-gorm-testing-support:1.1.4"
 		testCompile "org.grails:grails-web-testing-support:1.1.4"
 	}
 
-	if (isGrailsPlugin) {
-		group "org.grails.plugins"
-		apply from: "${commonBuild}/common-publishing.gradle"
 
+	if (isGrailsPlugin) {
+		println "Grails plugin ###"
+		group "org.grails.plugins"
 
 		apply plugin:"org.grails.grails-plugin"
 		apply plugin:"org.grails.grails-gsp"
+
+		apply from: "${commonBuild}/common-publishing.gradle"
 
 		dependencies {
 			compile "org.springframework.boot:spring-boot-starter-actuator"
