@@ -107,6 +107,9 @@ public abstract class AbstractJasperReportsView extends AbstractUrlBasedView {
 	 */
 	static final String CONTENT_DISPOSITION_INLINE = "inline";
 
+
+	static final String SUBREPORT_DIR = "SUBREPORT_DIR"
+
 	/**
 	 * A String key used to lookup the {@code JRDataSource} in the model.
 	 */
@@ -143,7 +146,7 @@ public abstract class AbstractJasperReportsView extends AbstractUrlBasedView {
 	/**
 	 * Holds mappings between sub-report keys and {@code JasperReport} objects.
 	 */
-	private Map<String, JasperReport> subReports;
+	private Map<String, JasperReport> subReports
 
 
 	/**
@@ -263,14 +266,37 @@ public abstract class AbstractJasperReportsView extends AbstractUrlBasedView {
 	 * report has been statically defined
 	 */
 	protected JasperReport loadReport() {
-		String url = getUrl();
+		Resource resource = getResource()
+		if(resource == null) return null
+		return JasperUtils.loadReport(resource)
+	}
+
+	/**
+	 * Returns the report as spring resource
+	 * @return Resource
+	 */
+	Resource getResource() {
+		String url = getUrl()
 		if (url == null) {
-			return null;
+			return null
 		}
 		//FIXME replace this with the viewResourceLoader
 		//it should have the full aboslute URL at this point in the game
-		Resource mainReport = getApplicationContext().getResource(url);
-		return JasperUtils.loadReport(mainReport)
+		return getApplicationContext().getResource(url);
+	}
+
+	/**
+	 * Returns the file object for this report, if exists, or returns null.
+	 * @return
+	 */
+	File getFile() {
+		try {
+			Resource resource = getResource()
+			return resource?.file
+		}catch(IOException e) {
+			logger.warn(e)
+			return null
+		}
 	}
 
 	/**
@@ -373,9 +399,13 @@ public abstract class AbstractJasperReportsView extends AbstractUrlBasedView {
 					"specify a 'url' on this view or override 'getReport()' or 'fillReport(Map)'");
 		}
 
+		//expose the same directory as SUBREPORT_DIR
+		if(getFile() && !model.containsKey(SUBREPORT_DIR)) {
+			model.SUBREPORT_DIR = getFile().parentFile.canonicalPath
+		}
+
 		JRDataSource jrDataSource = JasperUtils.extractJasperDataSrouce(model,this.reportDataKey)
 		DataSource jdbcDataSourceToUse = null;
-
 
 		if (!jrDataSource && this.jdbcDataSource) {
 			jrDataSource = new JRDataSourceJDBC(jdbcDataSource)

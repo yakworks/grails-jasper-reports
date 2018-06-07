@@ -97,7 +97,7 @@ public class  JasperViewResolver extends LoaderUrlBasedViewResolver {
     @CompileDynamic
     @Override
     protected AbstractUrlBasedView buildView(String viewName) throws Exception {
-        AbstractJasperReportsView view = (AbstractJasperReportsView) super.buildView(viewName);
+        AbstractJasperReportsView view = (AbstractJasperReportsView) super.buildView(viewName)
         view.reportDataKey = reportDataKey
         view.subReportUrls = subReportUrls
         view.subReportDataKeys = subReportDataKeys
