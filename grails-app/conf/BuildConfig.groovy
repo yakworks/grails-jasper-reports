@@ -24,6 +24,10 @@ grails.project.dependency.resolution = {
 
         //needed to pick up the shit for the crazy itext version they use
         mavenRepo "http://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/"
+        mavenRepo (id:'9ci-artifactory', url:'http://repo.9ci.com/grails-plugins') {
+            updatePolicy 'always' //this changes the default for updating SNAPSHOTs from interval:x
+        }
+
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
