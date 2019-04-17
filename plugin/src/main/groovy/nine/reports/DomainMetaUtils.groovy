@@ -32,26 +32,27 @@ class DomainMetaUtils {
      * @param columnTitles a list of overrides for titel labels, keyed off of the fields list
      * @return
      */
+    @SuppressWarnings(['ThrowRuntimeException'])
     @CompileDynamic
-    static Map<String,FieldMetadata> getFieldMetadata(PersistentEntity domainClass, List<String> fields, Map columnTitles = null) {
-        Map<String,FieldMetadata> columns = [:]
+    static Map<String, FieldMetadata> getFieldMetadata(PersistentEntity domainClass, List<String> fields, Map columnTitles = null) {
+        Map<String, FieldMetadata> columns = [:]
         fields.each { propertyName ->
             //Map colProps = [fieldName:propertyName]
             FieldMetadata fld = new FieldMetadata(propertyName)
 
             PersistentProperty property = getPropertyByName(domainClass, propertyName)
 
-            if(!property) {
+            if (!property) {
                 throw new RuntimeException("Invalid property name $propertyName for domain $domainClass.name")
             }
 
             Class dcPropType = property.type
             Class propertyType
             //assert Boolean.class.getName() == "foo"
-            List<Class> ctypes = [Boolean,Integer,Long,BigDecimal,Short,Float,Double,Byte,Character,Date,String,List]
+            List<Class> ctypes = [Boolean, Integer, Long, BigDecimal, Short, Float, Double, Byte, Character, Date, String, List]
 
-            for(Class clazz : ctypes){
-                if(isAssignableOrConvertibleFrom(clazz, dcPropType)){
+            for (Class clazz : ctypes) {
+                if (isAssignableOrConvertibleFrom(clazz, dcPropType)) {
                     //assert clazz.getName() == "foo"
                     //colProps['clazz'] = clazz.class
                     //TODO implement type short population
@@ -62,20 +63,20 @@ class DomainMetaUtils {
             }
             //set default width of 4 as a ratio
             fld.width = 20
-            switch (fld.typeClass){
-                case [Boolean,Character,Byte]:
+            switch (fld.typeClass) {
+                case [Boolean, Character, Byte]:
                     fld.width = 15
                     break
-                case [Date,Integer,Short]:
+                case [Date, Integer, Short]:
                     fld.width = 20
                     break
                 case [String]:
                     fld.width = 30
             }
             String colTitle = columnTitles?.get(propertyName)
-            if(colTitle){
+            if (colTitle) {
                 fld.title = columnTitles?.get(propertyName)
-            }else{
+            } else {
                 fld.title = getNaturalTitle(propertyName)
             }
 
@@ -90,31 +91,31 @@ class DomainMetaUtils {
      * @return
      */
     @CompileDynamic
-    static PersistentEntity findDomainClass(String name){
+    static PersistentEntity findDomainClass(String name) {
 
-        if(name.indexOf('.') == -1){
+        if (name.indexOf('.') == -1) {
             String propertyName = GrailsNameUtils.getPropertyName(name)
-            Holders.grailsApplication.mappingContext.persistentEntities.find({
+            Holders.grailsApplication.mappingContext.persistentEntities.find{
                 it.decapitalizedName == propertyName
-            })
-        }else{
+            }
+        } else {
             return Holders.grailsApplication.mappingContext.getPersistentEntity(name)
         }
 
     }
 
+    @SuppressWarnings(['ThrowRuntimeException'])
     //See https://github.com/grails/grails-core/issues/10978
     static PersistentProperty getPropertyByName(PersistentEntity entity, String name) {
-        if(name != null && name.contains(".")) {
+        if (name?.contains(".")) {
             int indexOfDot = name.indexOf('.')
             String basePropertyName = name.substring(0, indexOfDot)
             PersistentProperty property = entity.getPropertyByName(basePropertyName)
-            if(property instanceof Association) {
-                PersistentEntity association = ((Association)property).getAssociatedEntity()
+            if (property instanceof Association) {
+                PersistentEntity association = ((Association) property).getAssociatedEntity()
                 String restOfPropertyName = name.substring(indexOfDot + 1)
                 return getPropertyByName(association, restOfPropertyName)
-            }
-            else {
+            } else {
                 throw new RuntimeException("Property $basePropertyName of class $entity.javaClass.name is not an association")
             }
 
@@ -123,33 +124,27 @@ class DomainMetaUtils {
         }
     }
 
-
     /**
      * Converts a property name into its natural title equivalent eg ('firstName' becomes 'First Name')
      * customer.name = Customer (drops off the .name). product.code = Product Code ,
      * @return
      */
     @CompileDynamic
-    static String getNaturalTitle(String text){
+    static String getNaturalTitle(String text) {
         text = text.endsWith(".name") ? text[0..<text.lastIndexOf('.')] : text
         // make foo.bar into fooBar so we can pass it through the getNaturalName
-        text = text.replaceAll( "(\\.)([A-Za-z0-9])", { Object[] it -> it[2].toUpperCase() } )
+        text = text.replaceAll("(\\.)([A-Za-z0-9])") { Object[] it -> it[2].toUpperCase() }
         //text
         return GrailsNameUtils.getNaturalName(text)
 
     }
 
-
     /**
      * Orders by the specified property name and direction
      * takes invoice.customer.name and builds a closure that looke like
      *
-     * invoice {
-     *    customer {
-     *       order(name)
-     *    }
-     * }
-     * and then calls the that closure on this.
+     * invoice {*    customer {*       order(name)
+     *}*}* and then calls the that closure on this.
      *
      * @param propertyName The property name to order by
      * @param direction Either "asc" for ascending or "desc" for descending
@@ -159,10 +154,9 @@ class DomainMetaUtils {
      */
     @CompileDynamic
     static Closure orderNested(String propertyName, String direction) {
-        if(!propertyName.contains('.')) {
+        if (!propertyName.contains('.')) {
             return { order(propertyName, direction) }
-        }
-        else {
+        } else {
             def props = propertyName.split(/\./) as List
             def last = props.pop()
             Closure toDo = { order(last, direction) }
@@ -174,10 +168,10 @@ class DomainMetaUtils {
     }
 
     @CompileDynamic
-    static Closure orderNested(List groupFields, callingDelegate) {
+    static Closure orderNested(List groupFields, Closure callingDelegate) {
         return {
             groupFields.each {
-                def o = orderNested(it,'asc')
+                def o = orderNested(it, 'asc')
                 o.delegate = callingDelegate
                 o()
             }

@@ -7,6 +7,7 @@ import foo.ProductGroup
 import grails.testing.gorm.DataTest
 import grails.testing.web.GrailsWebUnitTest
 import org.grails.datastore.mapping.model.PersistentEntity
+import spock.lang.Ignore
 import spock.lang.Specification
 
 class DomainMetaUtilsSpec extends Specification implements DataTest, GrailsWebUnitTest {
@@ -28,6 +29,7 @@ class DomainMetaUtilsSpec extends Specification implements DataTest, GrailsWebUn
         assert colmap['name']
     }
 
+    @Ignore('https://github.com/yakworks/grails-jasper-reports/issues/11')
     void "buildColumnMap works with config on Bills and nested properties"() {
         given:
         PersistentEntity domainClass = grailsApplication.mappingContext.getPersistentEntity(Bills.name)

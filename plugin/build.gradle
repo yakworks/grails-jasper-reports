@@ -1,5 +1,14 @@
 
+apply plugin: 'yakworks.grails-plugin'
+apply plugin: "org.grails.grails-gsp"
+
 dependencies {
+    profile "org.grails.profiles:web-plugin"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    provided "org.springframework.boot:spring-boot-starter-tomcat"
+
+    provided "org.grails:grails-plugin-services"
+    provided "org.grails:grails-plugin-domain-class"
 
     def poiVersion='3.9'
     compile 'org.apache.poi:poi:'+poiVersion
@@ -28,7 +37,7 @@ dependencies {
         exclude module: 'batik-bridge' //don't need the barcode stuff
     }
 
-    compile 'org.grails.plugins:view-tools:1.1'
+    compile 'org.grails.plugins:view-tools:1.2-SNAPSHOT'
     testCompile "org.grails:grails-plugin-testing"
 }
 
@@ -38,3 +47,32 @@ bootRun {
 }
 // enable if you wish to package this plugin as a standalone application
 bootRepackage.enabled = false
+
+ext.codenarcRuleset= '''
+  getRule('LineLength').enabled = false
+  getRule('CyclomaticComplexity').enabled = false
+  getRule('NoWildcardImports').enabled = false
+  getRule('UnnecessaryDotClass').enabled = false
+  getRule('CatchException').enabled = false
+  getRule('AbcMetric').enabled = false
+  getRule('MethodSize').enabled = false
+  getRule('InvertedIfElse').enabled = false
+  //getRule('Println').enabled = false
+'''
+
+
+codenarcMain {
+    exclude '**/BootStrap.groovy'
+    exclude '**/GormToolsGrailsPlugin.groovy'
+    exclude '**/GormToolsPluginHelper.groovy'
+}
+
+codenarcTest {
+    exclude '**/*'
+    ignoreFailures = true
+}
+
+codenarcIntegrationTest {
+    exclude '**/*'
+    ignoreFailures = true
+}

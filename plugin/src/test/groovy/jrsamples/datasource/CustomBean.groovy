@@ -21,41 +21,40 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with JasperReports. If not, see <http://www.gnu.org/licenses/>.
  */
-package jrsamples.datasource;
+package jrsamples.datasource
 
 /**
  * @author Teodor Danciu (teodord@users.sourceforge.net)
  */
 class CustomBean {
 
-	String city
-	Integer id
-	String name
-	String street
-	BigDecimal rate
-	Currency currency
+    String city
+    Integer id
+    String name
+    String street
+    BigDecimal rate
+    Currency currency
 
 
-	/**
-	 *
-	 */
-	public CustomBean(String pcity, Integer pid, String pname, String pstreet,BigDecimal rate, String cur)
-	{
-		city = pcity;
-		id = pid;
-		name = pname;
-		street = pstreet;
-		this.rate = rate
-		currency = Currency.getInstance(cur)
-	}
+    /**
+     *
+     */
+    public CustomBean(String pcity, Integer pid, String pname, String pstreet,BigDecimal rate, String cur)
+    {
+        city = pcity;
+        id = pid;
+        name = pname;
+        street = pstreet;
+        this.rate = rate
+        currency = Currency.getInstance(cur)
+    }
 
 
-	/**
-	 *
-	 */
-	public CustomBean getMe() {
-		return this;
-	}
+    /**
+     *
+     */
+    public CustomBean getMe() {
+        return this;
+    }
 
 }
-

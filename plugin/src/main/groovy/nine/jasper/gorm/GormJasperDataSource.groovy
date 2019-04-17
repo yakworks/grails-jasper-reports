@@ -1,9 +1,9 @@
 package nine.jasper.gorm
 
-import net.sf.jasperreports.engine.JRException;
+import groovy.transform.CompileDynamic
+import net.sf.jasperreports.engine.JRException
 import net.sf.jasperreports.engine.JRField
-import net.sf.jasperreports.engine.JRRewindableDataSource;
-
+import net.sf.jasperreports.engine.JRRewindableDataSource
 
 /**
  * A data source implementation that wraps a collection of JavaBean objects.
@@ -18,74 +18,54 @@ import net.sf.jasperreports.engine.JRRewindableDataSource;
  * @author Teodor Danciu (teodord@users.sourceforge.net)
  */
 //FIXME Finish this
-public class GormJasperDataSource implements JRRewindableDataSource{
+@CompileDynamic
+public class GormJasperDataSource implements JRRewindableDataSource {
 
+    private Collection<?> data
+    private Iterator<?> iterator
+    private Object currentBean
 
-    /**
-     *
-     */
-    private Collection<?> data;
-    private Iterator<?> iterator;
-    private Object currentBean;
-
-
-    /**
-     *
-     */
-    public GormJasperDataSource(Collection<?> beanCollection)
-    {
-        this(beanCollection, true);
+    public GormJasperDataSource(Collection<?> beanCollection) {
+        this(beanCollection, true)
     }
 
-
     /**
      *
      */
-    public GormJasperDataSource(Collection<?> beanCollection, boolean isUseFieldDescription)
-    {
-        super(isUseFieldDescription);
+    public GormJasperDataSource(Collection<?> beanCollection, boolean isUseFieldDescription) {
+        super(isUseFieldDescription)
 
-        this.data = beanCollection;
+        this.data = beanCollection
 
-        if (this.data != null)
-        {
-            this.iterator = this.data.iterator();
+        if (this.data != null) {
+            this.iterator = this.data.iterator()
         }
     }
 
-
     @Override
-    public boolean next()
-    {
-        boolean hasNext = false;
+    public boolean next() {
+        boolean hasNext = false
 
-        if (this.iterator != null)
-        {
-            hasNext = this.iterator.hasNext();
+        if (this.iterator != null) {
+            hasNext = this.iterator.hasNext()
 
-            if (hasNext)
-            {
-                this.currentBean = this.iterator.next();
+            if (hasNext) {
+                this.currentBean = this.iterator.next()
             }
         }
 
-        return hasNext;
+        return hasNext
     }
 
-
     @Override
-    public Object getFieldValue(JRField field) throws JRException
-    {
-        return getFieldValue(currentBean, field);
+    public Object getFieldValue(JRField field) throws JRException {
+        return getFieldValue(currentBean, field)
     }
 
-
     @Override
-    public void moveFirst()
-    {
-        if (this.data != null)
-        {
-            this.iterator = this.data.iterator();
+    public void moveFirst() {
+        if (this.data != null) {
+            this.iterator = this.data.iterator()
         }
     }
 
@@ -94,9 +74,8 @@ public class GormJasperDataSource implements JRRewindableDataSource{
      *
      * @return the underlying bean collection
      */
-    public Collection<?> getData()
-    {
-        return data;
+    public Collection<?> getData() {
+        return data
     }
 
     /**
@@ -105,9 +84,8 @@ public class GormJasperDataSource implements JRRewindableDataSource{
      *
      * @return the total number of records of this data source
      */
-    public int getRecordCount()
-    {
-        return data == null ? 0 : data.size();
+    public int getRecordCount() {
+        return data == null ? 0 : data.size()
     }
 
 //    /**
@@ -118,6 +96,6 @@ public class GormJasperDataSource implements JRRewindableDataSource{
 //     */
 //    public JRBeanCollectionDataSource cloneDataSource()
 //    {
-//        return new JRBeanCollectionDataSource(data);
+//        return new JRBeanCollectionDataSource(data)
 //    }
 }
