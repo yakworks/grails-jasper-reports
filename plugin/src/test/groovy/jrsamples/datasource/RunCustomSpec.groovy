@@ -10,6 +10,7 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader
 import net.sf.jasperreports.export.*
 import org.grails.testing.GrailsUnitTest
 import org.springframework.core.io.FileSystemResource
+import org.springframework.core.io.Resource
 import spock.lang.Specification
 
 /**
@@ -29,7 +30,7 @@ class RunCustomSpec extends Specification implements GrailsUnitTest{
 
     //@CompileStatic
     def runReport() {
-        def resource = new FileSystemResource("src/test/resources/DataSourceReport.jrxml")
+        Resource resource = new FileSystemResource("src/test/resources/DataSourceReport.jrxml")
         InputStream is = resource.getInputStream()
         JasperReport jreport
         is.withStream {
@@ -42,7 +43,7 @@ class RunCustomSpec extends Specification implements GrailsUnitTest{
         long start = System.currentTimeMillis();
         //Preparing parameters
         Map parameters = ["ReportTitle":"Address Report", "DataFile": "CustomBeanFactory.java - Bean Collection"]
-        new File("target/jasper/").mkdir()
+        new File("target/jasper/").mkdirs()
         //parameters.put(JRParameter.IS_IGNORE_PAGINATION, Boolean.TRUE);
         JasperFillManager.fillReportToFile(
                 jreport, "target/jasper/DataSourceReport.jrprint",
