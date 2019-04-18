@@ -20,6 +20,10 @@ class JasperViewNoRequestSpec extends Specification implements GrailsUnitTest {
     ViewResourceLocator jasperViewResourceLocator //= ViewResourceLocator.mockForTest()
     JasperViewResolver jasperViewResolver
 
+    void setupSpec() {
+        new File("target/jasper").mkdirs()
+    }
+
     static List<Map> dataList = [
             [city:"Berne", id:22, name:"Bill Ott", street:"250 - 20th Ave.", country:[name:"US"]],
             [city:"Chicago", id:1, name:"Joshua Burnett", street:"22 3rd", country:[name:"US"]]
@@ -43,6 +47,7 @@ class JasperViewNoRequestSpec extends Specification implements GrailsUnitTest {
         JasperView view = jasperViewResolver.resolveViewName(viewName,null)
         model << [format:format]
         //def output = new ByteArrayOutputStream()
+
         view.render(model, output)
 
         then:
@@ -69,7 +74,8 @@ class JasperViewNoRequestSpec extends Specification implements GrailsUnitTest {
             people: CustomBeanFactory.beanCollection,
             format:format
         ]
-        def f = new File("target/jasper/contactReport.$format")
+        File f = new File("target/jasper/contactReport.$format")
+        if(!f.exists())f.createNewFile()
         view.render(model, f)
 
         then:
