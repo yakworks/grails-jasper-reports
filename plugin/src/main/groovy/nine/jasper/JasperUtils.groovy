@@ -35,6 +35,7 @@ import java.sql.SQLException
  */
 @Slf4j
 @CompileStatic
+@SuppressWarnings(['JdbcConnectionReference'])
 class JasperUtils {
 
     /**
@@ -55,61 +56,59 @@ class JasperUtils {
 
         switch (format) {
             case ReportFormat.PDF:
-                exporter = createExporterPDF(print,output)
+                exporter = createExporterPDF(print, output)
                 break
             case ReportFormat.XLSX:
-                exporter = createExporterXLSX(print,output)
+                exporter = createExporterXLSX(print, output)
                 break
             case ReportFormat.HTML:
-                exporter = createExporterHTML(print,output)
+                exporter = createExporterHTML(print, output)
                 break
             default:
-                throw new IllegalArgumentException("Export format [$format] not yet supported");
+                throw new IllegalArgumentException("Export format [$format] not yet supported")
         }
         //standard for all
-        exporter.setExporterInput(new SimpleExporterInput(print));
+        exporter.setExporterInput(new SimpleExporterInput(print))
 
         return exporter
 
     }
+
     @CompileDynamic
-    public static JRPdfExporter createExporterPDF(JasperPrint print,Object stream) throws JRException {
-        JRPdfExporter exporter = new JRPdfExporter();
-        exporter.setExporterInput(new SimpleExporterInput(print));
-        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(stream));
+    public static JRPdfExporter createExporterPDF(JasperPrint print, Object stream) throws JRException {
+        JRPdfExporter exporter = new JRPdfExporter()
+        exporter.setExporterInput(new SimpleExporterInput(print))
+        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(stream))
         return exporter
     }
 
     @CompileDynamic
-    public static JRXlsxExporter createExporterXLSX(JasperPrint print,Object stream) throws JRException {
-        JRXlsxExporter exporter = new JRXlsxExporter();
-        exporter.setExporterInput(new SimpleExporterInput(print));
-        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(stream));
+    public static JRXlsxExporter createExporterXLSX(JasperPrint print, Object stream) throws JRException {
+        JRXlsxExporter exporter = new JRXlsxExporter()
+        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(stream))
 
-        print.setProperty("net.sf.jasperreports.export.xls.detect.cell.type", "true");
-        print.setProperty("net.sf.jasperreports.export.xls.force.page.breaks", "true");
-        //print.setProperty("net.sf.jasperreports.export.ignore.page.margins", "true");
+        print.setProperty("net.sf.jasperreports.export.xls.detect.cell.type", "true")
+        print.setProperty("net.sf.jasperreports.export.xls.force.page.breaks", "true")
+        //print.setProperty("net.sf.jasperreports.export.ignore.page.margins", "true")
         return exporter
     }
 
     @CompileDynamic
     public static HtmlExporter createExporterHTML(JasperPrint print, Object writer) throws JRException {
-        HtmlExporter exporter = new HtmlExporter();
-        exporter.setExporterInput(new SimpleExporterInput(print));
-        exporter.setExporterOutput(new SimpleHtmlExporterOutput(writer));
-        SimpleHtmlExporterConfiguration exporterConfig = new SimpleHtmlExporterConfiguration();
-        exporterConfig.setBetweenPagesHtml("");
-        exporter.setConfiguration(exporterConfig);
-//        SimpleHtmlReportConfiguration reportConfig = new SimpleHtmlReportConfiguration();
-//        reportConfig.setRemoveEmptySpaceBetweenRows(true);
-//        exporter.setConfiguration(reportConfig);
+        HtmlExporter exporter = new HtmlExporter()
+        exporter.setExporterInput(new SimpleExporterInput(print))
+        exporter.setExporterOutput(new SimpleHtmlExporterOutput(writer))
+        SimpleHtmlExporterConfiguration exporterConfig = new SimpleHtmlExporterConfiguration()
+        exporterConfig.setBetweenPagesHtml("")
+        exporter.setConfiguration(exporterConfig)
+//        SimpleHtmlReportConfiguration reportConfig = new SimpleHtmlReportConfiguration()
+//        reportConfig.setRemoveEmptySpaceBetweenRows(true)
+//        exporter.setConfiguration(reportConfig)
 
-        print.setProperty("net.sf.jasperreports.export.ignore.page.margins", "true");
+        print.setProperty("net.sf.jasperreports.export.ignore.page.margins", "true")
 
         return exporter
     }
-
-
 
     /**
      * Convert the given report data value to a {@code JRDataSource}.
@@ -127,14 +126,11 @@ class JasperUtils {
     public static JRDataSource convertReportData(Object value) throws IllegalArgumentException {
         if (value instanceof JRDataSource) {
             return value as JRDataSource
-        }
-        else if (value instanceof Collection) {
+        } else if (value instanceof Collection) {
             return new JRBeanCollectionDataSource((Collection<?>) value)
-        }
-        else if (value instanceof Object[]) {
-            return new JRBeanArrayDataSource(value);
-        }
-        else {
+        } else if (value instanceof Object[]) {
+            return new JRBeanArrayDataSource(value)
+        } else {
             throw new IllegalArgumentException("Value [" + value + "] cannot be converted to a JRDataSource")
         }
     }
@@ -153,13 +149,12 @@ class JasperUtils {
     public static void renderAsHtml(JasperReport report, Map<String, Object> parameters, Object reportData,
                                     Writer writer) throws JRException {
 
-        JasperPrint print = JasperFillManager.fillReport(report, parameters, convertReportData(reportData));
+        JasperPrint print = JasperFillManager.fillReport(report, parameters, convertReportData(reportData))
 
-        HtmlExporter exporter = createExporterHTML( print,  writer)
-        exporter.exportReport();
+        HtmlExporter exporter = createExporterHTML(print, writer)
+        exporter.exportReport()
 
     }
-
 
     /**
      * Render a report in PDF format using the supplied report data.
@@ -174,8 +169,8 @@ class JasperUtils {
     public static void renderAsPdf(JasperReport report, Map<String, Object> parameters, Object reportData,
                                    OutputStream stream) throws JRException {
 
-        JasperPrint print = JasperFillManager.fillReport(report, parameters, convertReportData(reportData));
-        JasperExportManager.exportReportToPdfStream(print,stream)
+        JasperPrint print = JasperFillManager.fillReport(report, parameters, convertReportData(reportData))
+        JasperExportManager.exportReportToPdfStream(print, stream)
     }
 
     /**
@@ -191,12 +186,12 @@ class JasperUtils {
         FileSystemResource fsr
         Exporter exporter
 
-        if(output == null) {
+        if (output == null) {
             File tmp = File.createTempFile("jasper-${print.name}", format.extension)
             fsr = new FileSystemResource(tmp)
-            exporter = createExporter(format,print,fsr.outputStream)
-        }else{
-            exporter = createExporter(format,print,output)
+            exporter = createExporter(format, print, fsr.outputStream)
+        } else {
+            exporter = createExporter(format, print, output)
         }
         exporter.exportReport()
 
@@ -215,7 +210,7 @@ class JasperUtils {
      * @throws JRException
      */
     public static Resource render(ReportFormat format, String sourceFileName, String destFileName,
-                              Map<String, Object> parameters, Object reportData) throws JRException {
+                                  Map<String, Object> parameters, Object reportData) throws JRException {
 
         JasperReport rpt = loadReport(sourceFileName)
 
@@ -223,7 +218,7 @@ class JasperUtils {
 
         def fsr = new FileSystemResource(destFileName)
 
-        Exporter exporter = createExporter(format,print,fsr.outputStream)
+        Exporter exporter = createExporter(format, print, fsr.outputStream)
         exporter.exportReport()
 
         return fsr
@@ -246,15 +241,14 @@ class JasperUtils {
 
         JasperPrint print = JasperFillManager.fillReport(rpt, parameters, convertReportData(reportData))
 
-        File tmp = File.createTempFile("jasper-${rpt.name}",format.extension)
+        File tmp = File.createTempFile("jasper-${rpt.name}", format.extension)
         def fsr = new FileSystemResource(tmp)
 
-        Exporter exporter = createExporter(format,print,fsr.outputStream)
+        Exporter exporter = createExporter(format, print, fsr.outputStream)
         exporter.exportReport()
 
         return fsr
     }
-
 
     /**
      * just calls loadReport after converting string to a Resource
@@ -271,18 +265,17 @@ class JasperUtils {
      */
     public static JasperReport loadReport(Resource resource) {
         try {
-            String filename = resource.getFilename();
+            String filename = resource.getFilename()
             if (filename != null) {
                 if (filename.endsWith(".jasper")) {
                     // Load pre-compiled report.
-                    log.debug("Loading pre-compiled Jasper Report from $resource");
+                    log.debug("Loading pre-compiled Jasper Report from $resource")
                     return resource.getInputStream().withStream {
                         return (JasperReport) JRLoader.loadObject(it)
                     }
-                }
-                else if (filename.endsWith(".jrxml")) {
+                } else if (filename.endsWith(".jrxml")) {
                     // Compile report on-the-fly.
-                    log.debug("Compiling Jasper Report loaded from $resource");
+                    log.debug("Compiling Jasper Report loaded from $resource")
                     return resource.getInputStream().withStream {
                         return JasperCompileManager.compileReport(it)
                     }
@@ -291,16 +284,16 @@ class JasperUtils {
                 throw new IllegalArgumentException("Report filename [" + filename + "] must end in either .jasper or .jrxml")
             }
             throw new IllegalArgumentException(
-                    "Report [$resource} getFilename can't be null");
+                    "Report [$resource} getFilename can't be null")
 
         }
         catch (IOException ex) {
             throw new ApplicationContextException(
-                    "Could not load JasperReports report from " + resource, ex);
+                    "Could not load JasperReports report from " + resource, ex)
         }
         catch (JRException ex) {
             throw new ApplicationContextException(
-                    "Could not parse JasperReports report from " + resource, ex);
+                    "Could not parse JasperReports report from " + resource, ex)
         }
     }
 
@@ -312,18 +305,18 @@ class JasperUtils {
      * @return Map with keys [name, description, value( default value), type (the valueClass)]
      */
     @CompileStatic(TypeCheckingMode.SKIP)
-    public static List<Map<String,Object>> getPromptingParams(JasperReport jasperReport) {
+    public static List<Map<String, Object>> getPromptingParams(JasperReport jasperReport) {
         JRParameter[] params = jasperReport.getParameters()
         return params.findAll { param ->
             !param.systemDefined && param.forPrompting
         }.collect { param ->
             [
-                name: param.name,
-                description: param.description ?: StringUtils.capitalize(param.name),
-                value: param.defaultValueExpression?.text,
-                type: param.valueClass,
-                valueClass: param.valueClass,
-                valueClassName: param.valueClassName
+                    name          : param.name,
+                    description   : param.description ?: StringUtils.capitalize(param.name),
+                    value         : param.defaultValueExpression?.text,
+                    type          : param.valueClass,
+                    valueClass    : param.valueClass,
+                    valueClassName: param.valueClassName
             ]
         }
     }
@@ -336,31 +329,30 @@ class JasperUtils {
      * @param reportDataKey the dataKey to use to find the datasource
      * @return the JRDataSource instance to use
      */
-    public static JRDataSource extractJasperDataSrouce(Map<String, Object> model, String reportDataKey = null) throws Exception {
+    public
+    static JRDataSource extractJasperDataSrouce(Map<String, Object> model, String reportDataKey = null) throws Exception {
         // Determine main report.
 
-        JRDataSource jrDataSource = null;
+        JRDataSource jrDataSource = null
 
         // Try with the specified key
         if (reportDataKey && model[reportDataKey]) {
-            Object reportDataValue = model.get(reportDataKey);
+            Object reportDataValue = model.get(reportDataKey)
             if (reportDataValue instanceof DataSource) {
-                return new JRDataSourceJDBC((DataSource)reportDataValue)
-            }
-            else {
-                return convertReportData(reportDataValue);
+                return new JRDataSourceJDBC((DataSource) reportDataValue)
+            } else {
+                return convertReportData(reportDataValue)
             }
         }
 
         //find the first item in map thats a collection
-        Collection<?> values = model.values();
-        jrDataSource = CollectionUtils.findValueOfType(values, JRDataSource.class);
-        if(jrDataSource) {
+        Collection<?> values = model.values()
+        jrDataSource = CollectionUtils.findValueOfType(values, JRDataSource)
+        if (jrDataSource) {
             return jrDataSource
-        }
-        else{
+        } else {
             // see if the map has a DataSource in it and grab it
-            def ds = CollectionUtils.findValueOfType(values, DataSource.class);
+            def ds = CollectionUtils.findValueOfType(values, DataSource)
             if (ds) {
                 return new JRDataSourceJDBC(ds)
             }
@@ -368,22 +360,23 @@ class JasperUtils {
 
     }
 
-    public static JasperPrint fillReport(JasperReport report, Map<String, Object> model, DataSource dataSource) throws DataAccessException {
+    public
+    static JasperPrint fillReport(JasperReport report, Map<String, Object> model, DataSource dataSource) throws DataAccessException {
 
-        Connection con = DataSourceUtils.getConnection(dataSource);
+        Connection con = DataSourceUtils.getConnection(dataSource)
         try {
 
-            return JasperFillManager.fillReport(report, model, con);
+            return JasperFillManager.fillReport(report, model, con)
         }
         catch (SQLException ex) {
             // Release Connection early, to avoid potential connection pool deadlock
             // in the case when the exception translator hasn't been initialized yet.
-            DataSourceUtils.releaseConnection(con, dataSource);
-            con = null;
-            throw new DataRetrievalFailureException(ex.message,ex)
+            DataSourceUtils.releaseConnection(con, dataSource)
+            con = null
+            throw new DataRetrievalFailureException(ex.message, ex)
         }
         finally {
-            DataSourceUtils.releaseConnection(con, dataSource);
+            DataSourceUtils.releaseConnection(con, dataSource)
         }
     }
 }

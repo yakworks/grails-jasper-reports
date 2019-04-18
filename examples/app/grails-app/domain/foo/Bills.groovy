@@ -1,5 +1,8 @@
 package foo
 
+import grails.compiler.GrailsCompileStatic
+
+@GrailsCompileStatic
 class Bills {
 
     Customer customer

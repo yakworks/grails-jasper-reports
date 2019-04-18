@@ -15,7 +15,7 @@ import spock.lang.Specification
 class NestPropsSpec extends Specification implements GrailsUnitTest {
 
     void "test this"() {
-    	expect:
+        expect:
         runReport()
         //print()
         pdf()

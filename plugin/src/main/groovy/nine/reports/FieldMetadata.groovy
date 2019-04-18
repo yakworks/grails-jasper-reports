@@ -5,9 +5,9 @@ package nine.reports
  */
 class FieldMetadata implements Serializable {
 
-    public FieldMetadata(){}
+    public FieldMetadata() {}
 
-    public FieldMetadata(String property){
+    public FieldMetadata(String property) {
         this.property = property
     }
     /**
@@ -65,8 +65,8 @@ class FieldMetadata implements Serializable {
      */
     Object builder
 
-    Boolean isBooleanType(){
-        if(typeClass == java.lang.Boolean || typeClassName == 'java.lang.Boolean'){
+    Boolean isBooleanType() {
+        if (typeClass == java.lang.Boolean || typeClassName == 'java.lang.Boolean') {
             return true
         }
     }

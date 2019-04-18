@@ -1,7 +1,7 @@
 /*
  * Copyright 2009-2011 the original author or authors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -34,20 +34,18 @@ import javax.sql.DataSource
  * This uses the {@link grails.plugin.viewtools.ViewResourceLocator} to locate the resource
  *
  * This gets used simply by registering it as a spring bean
- *   jasperViewResolver(JasperViewResolver){
- *      viewResourceLocator = ref("viewResourceLocator")
+ *   jasperViewResolver(JasperViewResolver){*      viewResourceLocator = ref("viewResourceLocator")
  *      jdbcDataSource = ref("dataSource")
  *      reportDataKey = "datasource"
  *      viewNames = ["*.jasper","*.jrxml"] as String[]
  *      viewClass = JasperReportsMultiFormatView.class
  *      order = 20
- *   }
- *
+ *}*
  * @author Joshua Burnett
  */
 @Slf4j
 @CompileStatic
-public class  JasperViewResolver extends LoaderUrlBasedViewResolver {
+public class JasperViewResolver extends LoaderUrlBasedViewResolver {
     //injected autowired
     DataSource dataSource
 
@@ -61,22 +59,22 @@ public class  JasperViewResolver extends LoaderUrlBasedViewResolver {
 
     Properties headers
 
-    //Map<String, Object> exporterParameters = new HashMap<String, Object>();
+    //Map<String, Object> exporterParameters = new HashMap<String, Object>()
 
     /**
      * Requires the view class to be a subclass of {@link AbstractJasperReportsView}.
      */
     @Override
     protected Class<?> requiredViewClass() {
-        return AbstractJasperReportsView.class;
+        return AbstractJasperReportsView.class
     }
 
-
-    @Override //Overriden for logging
+    @Override
+    //Overriden for logging
     public View resolveViewName(String viewName, Locale locale) throws Exception {
         log.debug("resolveViewName with $viewName")
 
-        return super.resolveViewName(viewName,locale);
+        return super.resolveViewName(viewName, locale)
     }
 
     /**
@@ -85,10 +83,10 @@ public class  JasperViewResolver extends LoaderUrlBasedViewResolver {
      * @param jr
      * @return
      */
-    public AbstractJasperReportsView getView(JasperReport jr){
+    public AbstractJasperReportsView getView(JasperReport jr) {
         AbstractJasperReportsView view = (AbstractJasperReportsView) buildView("JasperReport_Populated_JasperView")
         view.url = null
-        view =  (AbstractJasperReportsView) applicationContext.autowireCapableBeanFactory.initializeBean(view, "JasperReport_Populated_JasperView");
+        view = (AbstractJasperReportsView) applicationContext.autowireCapableBeanFactory.initializeBean(view, "JasperReport_Populated_JasperView")
         //order is important here as the initializeBean calls initApplicationContext which nulls the report out
         view.report = jr
         view
@@ -96,16 +94,17 @@ public class  JasperViewResolver extends LoaderUrlBasedViewResolver {
 
     @CompileDynamic
     @Override
+    @SuppressWarnings(['UnnecessaryObjectReferences'])
     protected AbstractUrlBasedView buildView(String viewName) throws Exception {
-        AbstractJasperReportsView view = (AbstractJasperReportsView) super.buildView(viewName);
+        AbstractJasperReportsView view = (AbstractJasperReportsView) super.buildView(viewName)
         view.reportDataKey = reportDataKey
         view.subReportUrls = subReportUrls
         view.subReportDataKeys = subReportDataKeys
         view.headers = headers
-        //view.setExporterParameters(this.exporterParameters);
+        //view.setExporterParameters(this.exporterParameters)
         view.jdbcDataSource = dataSource
         view.formatKey = formatKey
-        return view;
+        return view
     }
 
 }

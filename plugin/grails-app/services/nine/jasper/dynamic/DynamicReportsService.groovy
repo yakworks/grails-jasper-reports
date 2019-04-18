@@ -33,14 +33,15 @@ class DynamicReportsService {
 
     GrailsApplication grailsApplication
 
-    JasperReportBuilder buildDynamicReport(Map reportCfg){
+    JasperReportBuilder buildDynamicReport(Map reportCfg) {
         PersistentEntity domainClass = DomainMetaUtils.findDomainClass(reportCfg.domain)
         //TODO blow logical error here is domainClass can't be found
 
         buildDynamicReport(domainClass, reportCfg)
     }
+
     JasperReportBuilder buildDynamicReport(PersistentEntity domainClass, Map reportCfg, Map params = null) {
-        println "doReport with $params"
+        log.debug "doReport with $params"
 
         //TODO do some basic validation on reportCfg. maybe even setup domains for them
         List fields = reportCfg["fields"] as List
@@ -48,29 +49,29 @@ class DynamicReportsService {
 
         //?: getPropertyValue(domainClass.clazz, 'reportColumns') ?: domainClass.properties.name - ['id', 'version']
         JasperReportBuilder jrb = new JasperReportBuilder()
-            .title(TemplateStyles.createTitleComponent("Group"))
-            .setTemplate(TemplateStyles.reportTemplate)
-            .templateStyles(TemplateStyles.loadStyles(grailsApplication.mainContext))
+                .title(TemplateStyles.createTitleComponent("Group"))
+                .setTemplate(TemplateStyles.reportTemplate)
+                .templateStyles(TemplateStyles.loadStyles(grailsApplication.mainContext))
 
 //        def res = grailsApplication.mainContext.getResource("classpath:nine/jasper/DefaultTemplate.jrxml")
 //        jrb.setTemplateDesign(res.inputStream)
 
-        if(reportCfg.highlightDetailOddRows) {
+        if (reportCfg.highlightDetailOddRows) {
             jrb.highlightDetailOddRows().setDetailOddRowStyle(TemplateStyles.oddRowStyle)
         }
-        if(reportCfg.showGridLines) {
+        if (reportCfg.showGridLines) {
             jrb.setColumnStyle(TemplateStyles.columnWithGridLines)//StyleTemplates.columnStyleWithGridLines)//
         }
-        if(reportCfg.tableOfContents) {
+        if (reportCfg.tableOfContents) {
             jrb.tableOfContents()
         }
-        if(reportCfg.ignorePagination){
+        if (reportCfg.ignorePagination) {
             jrb.ignorePagination()
-        }else{
+        } else {
             jrb.pageFooter(TemplateStyles.createFooter())
         }
 
-        if(reportCfg.landscape){
+        if (reportCfg.landscape) {
             jrb.setPageFormat(PageType.LETTER, PageOrientation.LANDSCAPE)
         }
 
@@ -78,29 +79,28 @@ class DynamicReportsService {
         //.sortBy(dateColumn, invoiceColumn)
 
         //Column setups
-        Map<String,FieldMetadata> fieldMetaMap = DomainMetaUtils.getFieldMetadata(domainClass, fields, reportCfg.columnTitles)
-        populateColumnBuilders(fieldMetaMap,jrb)
+        Map<String, FieldMetadata> fieldMetaMap = DomainMetaUtils.getFieldMetadata(domainClass, fields, reportCfg.columnTitles)
+        populateColumnBuilders(fieldMetaMap, jrb)
         List<ColumnBuilder> columnBuilderList = fieldMetaMap.values()*.builder.toList()
         jrb.columns(*columnBuilderList)
 
         //Groups
-        Map<String,Map> groupBuilders = buildGroupBands(fieldMetaMap, reportCfg)
-        groupBuilders.eachWithIndex{k,v,i->
+        Map<String, Map> groupBuilders = buildGroupBands(fieldMetaMap, reportCfg)
+        groupBuilders.eachWithIndex { k, v, i ->
             jrb.groupBy(v.builder.headerWithSubtotal()).subtotalsAtGroupFooter(v.builder, *v.subtotalBuilders)
         }
 
-        if(reportCfg.columnHeaderInFirstGroup) jrb.setShowColumnTitle(false)
-        if(reportCfg.showTableOfContents) jrb.tableOfContents()
+        if (reportCfg.columnHeaderInFirstGroup) jrb.setShowColumnTitle(false)
+        if (reportCfg.showTableOfContents) jrb.tableOfContents()
 
         return jrb
     }
-
 
     Collection<?> createDataSource(PersistentEntity domainClass, List groupFields) {
         List results
         if (groupFields) {
             def c = domainClass.javaClass.createCriteria()
-            results = c.list{
+            results = c.list {
                 orderNested(groupFields).call()
             }
             //recs = domainClass.clazz.findAll("from $domainClass.clazz.name as s order by ${groupFields.join(',')}")
@@ -116,19 +116,19 @@ class DynamicReportsService {
      * @param fieldMap
      * @return the same map ref populated
      */
-    Map<String,FieldMetadata> populateColumnBuilders(Map<String,FieldMetadata> fieldMap,JasperReportBuilder jrb){
+    Map<String, FieldMetadata> populateColumnBuilders(Map<String, FieldMetadata> fieldMap, JasperReportBuilder jrb) {
         //Map<String,Map> drCols = [:]
 
         fieldMap.each { /*key*/ String field, /*value*/ FieldMetadata fld ->
             ColumnBuilder colb
             colb = Columns.column(field, DataTypes.detectType(fld.typeClass)).setAnchorName(field)
-            colb.setWidth(fld.width == null?4:fld.width)
+            colb.setWidth(fld.width == null ? 4 : fld.width)
             //link symbols , 221e,260d, 2709 is email, 270e is pencil
-            HyperLinkBuilder link = hyperLink(jrExp('"https://www.google.com/search?q=" + $F{' + field +'}'))
+            HyperLinkBuilder link = hyperLink(jrExp('"https://www.google.com/search?q=" + $F{' + field + '}'))
             colb.setHyperLink(link)
 
-            if(fld.isBooleanType()){
-                jrb.addField(field,Boolean.class) //drb.field(field,Boolean.class)
+            if (fld.isBooleanType()) {
+                jrb.addField(field, Boolean.class) //drb.field(field,Boolean.class)
 
                 //? (char)0x2611 : (char)0x2610") //<- see http://dejavu.sourceforge.net/samples/DejaVuSans.pdf for more options
                 JasperExpression bool = jrExp('$F{' + field + '} ? (char)0x2713 : ""')
@@ -137,7 +137,7 @@ class DynamicReportsService {
                 //def sb = new StyleBuilder()
                 //sb.object.parentStyle = jrb.object.columnStyle
                 //colb.style = sb.bold()//.setFontSize(18)
-                colb.setWidth(fld.width == null?1:fld.width)
+                colb.setWidth(fld.width == null ? 1 : fld.width)
             }
 
             colb.setTitle(jrText(fld.title))
@@ -146,32 +146,29 @@ class DynamicReportsService {
         return fieldMap
     }
 
-    Map<String,Map> buildGroupBands(Map<String,FieldMetadata> fieldMetaMap, Map config ){
+    Map<String, Map> buildGroupBands(Map<String, FieldMetadata> fieldMetaMap, Map config) {
 
-        Map<String,Map> groups = [:]
+        Map<String, Map> groups = [:]
         int grpSize = (config.groups as Map).size()
         config.groups.eachWithIndex { String field, Integer index ->
-            ColumnGroupBuilder group = Groups.group("Group_$field",fieldMetaMap[field].builder as ValueColumnBuilder)
-            boolean isLastOrSingleGroup = (grpSize == index+1)
+            ColumnGroupBuilder group = Groups.group("Group_$field", fieldMetaMap[field].builder as ValueColumnBuilder)
+            boolean isLastOrSingleGroup = (grpSize == index + 1)
             group.setPadding(3)
 
             if (index == 0) {
                 group.setHeaderLayout(GroupHeaderLayout.VALUE)
-                if(config?.columnHeaderInFirstGroup) group.showColumnHeaderAndFooter()
+                if (config?.columnHeaderInFirstGroup) group.showColumnHeaderAndFooter()
                 group.setStyle(TemplateStyles.group)
                 group.setFooterStyle(TemplateStyles.group)
-                if(config.footerLabels){
 
-                }
-            } else if (index == 1){
+            } else if (index == 1) {
                 //group.setHeaderLayout(GroupHeaderLayout.VALUE)
                 group.setStyle(TemplateStyles.groupL2)
                 group.setHeaderStyle(TemplateStyles.groupHeaderL2)
                 group.setFooterStyle(TemplateStyles.groupFooterL2)
                 //group.setPadding(3)
                 //group.showColumnHeaderAndFooter
-            }
-            else{
+            } else {
                 group.setStyle(TemplateStyles.groupL3)
                 group.setHeaderStyle(TemplateStyles.groupHeaderL3)
                 group.setFooterStyle(TemplateStyles.groupFooterL3)
@@ -199,14 +196,14 @@ class DynamicReportsService {
 //            group.addFooterComponent(comp)
 
             //don't add it to the last group by default or if there is only 1 group
-            if(config.groupTotalLabels && sbtList && !isLastOrSingleGroup) {
+            if (config.groupTotalLabels && sbtList && !isLastOrSingleGroup) {
                 //just add it to the first one
                 //sbtList[0].setLabel("${fieldMetaMap[field].title} Totals").setLabelPosition(Position.LEFT);
 
-                JasperExpression<String> label = jrExp("\$F{" + field + "} + \" Total\"", String.class);
+                JasperExpression<String> label = jrExp("\$F{" + field + "} + \" Total\"", String.class)
                 //sbtList.add drb.sbt.first(label,fieldMetaMap[config.groupTotalLabels].builder)
                 group.setFooterBackgroundComponent(
-                    Components.text(label).setStyle(TemplateStyles.subtotal)
+                        Components.text(label).setStyle(TemplateStyles.subtotal)
                 )
             }
 
@@ -218,7 +215,7 @@ class DynamicReportsService {
         return groups
     }
 
-
+    @SuppressWarnings(['UnusedPrivateMethod'])
     private Map loadConfig() {
         def config = grailsApplication.config
         GroovyClassLoader classLoader = new GroovyClassLoader(getClass().classLoader)
@@ -231,11 +228,11 @@ class DynamicReportsService {
         return new ConfigSlurper(GrailsUtil.environment).parse(new Properties()).merge(config.dynamicJasper)
     }
 
-    def getPropertyValue(def clazz, def propertyName) {
+    def getPropertyValue(Class clazz, String propertyName) {
         clazz.metaClass.hasProperty(clazz, propertyName)?.getProperty(clazz)
     }
 
-    def setPropertyIfNotNull(def target, def propertyName, def value) {
+    def setPropertyIfNotNull(Object target, String propertyName, Object value) {
         if (value != null && (!(value instanceof ConfigObject) || !(value.isEmpty()))) {
             target[propertyName] = value
         }
@@ -250,7 +247,7 @@ class DynamicReportsService {
      * @return the expression
      */
     public JasperExpression<String> jrText(String text) {
-        return Expressions.jasperSyntaxText(text);
+        return Expressions.jasperSyntaxText(text)
     }
 
     /**
@@ -262,7 +259,7 @@ class DynamicReportsService {
      * @return the expression
      */
     public <T> JasperExpression<T> jrExp(String expression, Class<? super T> valueClass) {
-        return Expressions.jasperSyntax(expression, valueClass);
+        return Expressions.jasperSyntax(expression, valueClass)
     }
 
     /**
@@ -274,8 +271,7 @@ class DynamicReportsService {
      */
     @SuppressWarnings("rawtypes")
     public JasperExpression jrExp(String expression) {
-        return Expressions.jasperSyntax(expression);
+        return Expressions.jasperSyntax(expression)
     }
-
 
 }

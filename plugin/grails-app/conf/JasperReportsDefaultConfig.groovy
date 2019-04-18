@@ -57,4 +57,3 @@ reporting {
         localizedLookup = false
     }
 }
-

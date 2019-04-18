@@ -11,12 +11,12 @@ import javax.sql.DataSource
  * Simple container class so we can pass the jdbc connection around as a JRDataSource
  */
 @CompileStatic
-class JRDataSourceJDBC implements JRDataSource{
+class JRDataSourceJDBC implements JRDataSource {
 
     DataSource dataSource
 
     public JRDataSourceJDBC(DataSource dataSource) {
-        this.dataSource = dataSource;
+        this.dataSource = dataSource
     }
 
     @Override
@@ -28,8 +28,5 @@ class JRDataSourceJDBC implements JRDataSource{
     Object getFieldValue(JRField jrField) throws JRException {
         throw new JRException("Not implemented")
     }
-
-
-
 
 }

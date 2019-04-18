@@ -19,7 +19,7 @@ class RunCustomSpec extends Specification implements GrailsUnitTest{
 
 
     void "test something"() {
-    	expect:
+        expect:
         runReport()
         //print()
         pdf()
