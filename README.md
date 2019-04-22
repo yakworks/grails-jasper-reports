@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/yakworks/grails-jasper-reports.svg?branch=master)](https://travis-ci.org/yakworks/grails-jasper-reports)
+![CircleCI](https://img.shields.io/circleci/project/github/yakworks/grails-jasper-reports.svg?longCache=true&style=for-the-badge)
 
 
 version 3.0.x - Works with Grails 3.2.x
