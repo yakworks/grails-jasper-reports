@@ -128,7 +128,7 @@ class DynamicReportsService {
             colb.setHyperLink(link)
 
             if (fld.isBooleanType()) {
-                jrb.addField(field, Boolean.class) //drb.field(field,Boolean.class)
+                jrb.addField(field, Boolean) //drb.field(field,Boolean.class)
 
                 //? (char)0x2611 : (char)0x2610") //<- see http://dejavu.sourceforge.net/samples/DejaVuSans.pdf for more options
                 JasperExpression bool = jrExp('$F{' + field + '} ? (char)0x2713 : ""')
@@ -200,7 +200,7 @@ class DynamicReportsService {
                 //just add it to the first one
                 //sbtList[0].setLabel("${fieldMetaMap[field].title} Totals").setLabelPosition(Position.LEFT);
 
-                JasperExpression<String> label = jrExp("\$F{" + field + "} + \" Total\"", String.class)
+                JasperExpression<String> label = jrExp("\$F{" + field + "} + \" Total\"", String)
                 //sbtList.add drb.sbt.first(label,fieldMetaMap[config.groupTotalLabels].builder)
                 group.setFooterBackgroundComponent(
                         Components.text(label).setStyle(TemplateStyles.subtotal)

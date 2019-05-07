@@ -154,9 +154,7 @@ class DomainMetaUtils {
      */
     @CompileDynamic
     static Closure orderNested(String propertyName, String direction) {
-        if (!propertyName.contains('.')) {
-            return { order(propertyName, direction) }
-        } else {
+        if (propertyName.contains('.')) {
             def props = propertyName.split(/\./) as List
             def last = props.pop()
             Closure toDo = { order(last, direction) }
@@ -164,6 +162,9 @@ class DomainMetaUtils {
                 { -> "$prop"(acc) }
             }
             return newOrderBy
+        } else {
+            return { order(propertyName, direction) }
+
         }
     }
 

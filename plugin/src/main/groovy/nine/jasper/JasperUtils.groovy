@@ -11,7 +11,11 @@ import net.sf.jasperreports.engine.export.HtmlExporter
 import net.sf.jasperreports.engine.export.JRPdfExporter
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter
 import net.sf.jasperreports.engine.util.JRLoader
-import net.sf.jasperreports.export.*
+import net.sf.jasperreports.export.Exporter
+import net.sf.jasperreports.export.SimpleExporterInput
+import net.sf.jasperreports.export.SimpleHtmlExporterConfiguration
+import net.sf.jasperreports.export.SimpleHtmlExporterOutput
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput
 import nine.reports.ReportFormat
 import org.springframework.context.ApplicationContextException
 import org.springframework.core.io.FileSystemResource

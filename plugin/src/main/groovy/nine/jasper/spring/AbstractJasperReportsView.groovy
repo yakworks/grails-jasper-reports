@@ -17,7 +17,12 @@ package nine.jasper.spring
 
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
-import net.sf.jasperreports.engine.*
+import net.sf.jasperreports.engine.JRDataSource
+import net.sf.jasperreports.engine.JRException
+import net.sf.jasperreports.engine.JRParameter
+import net.sf.jasperreports.engine.JasperFillManager
+import net.sf.jasperreports.engine.JasperPrint
+import net.sf.jasperreports.engine.JasperReport
 import nine.jasper.JRDataSourceJDBC
 import nine.jasper.JasperUtils
 import org.springframework.context.ApplicationContextException
@@ -445,7 +450,7 @@ public abstract class AbstractJasperReportsView extends AbstractUrlBasedView {
      * @return the value types in prioritized order
      */
     protected Class<?>[] getReportDataTypes() {
-        return [Collection.class, ([] as Object[]).class] as Class<?>[]
+        return [Collection, ([] as Object[]).class] as Class<?>[]
     }
 
     /**

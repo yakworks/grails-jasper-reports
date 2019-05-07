@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package nine.jasper.spring
 
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import groovy.util.logging.Slf4j
-import net.sf.jasperreports.engine.JRParameter
-import nine.reports.ReportFormat
 import net.sf.jasperreports.engine.JRAbstractExporter
+import net.sf.jasperreports.engine.JRParameter
 import net.sf.jasperreports.engine.JasperPrint
 import net.sf.jasperreports.export.Exporter
 import net.sf.jasperreports.export.WriterExporterOutput
 import nine.jasper.JasperUtils
+import nine.reports.ReportFormat
 import org.springframework.web.util.WebUtils
 
 import javax.servlet.ServletOutputStream
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+
 /**
  * JasperReports view class that allows for the actual rendering format
  * to be specified at runtime using a parameter contained in the model.

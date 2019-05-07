@@ -1,8 +1,12 @@
 package nine.reports
 
+import groovy.transform.CompileStatic
+
 /**
  * Stores basic information about a Field (property or column)
  */
+
+@CompileStatic
 class FieldMetadata implements Serializable {
 
     public FieldMetadata() {}
@@ -66,7 +70,7 @@ class FieldMetadata implements Serializable {
     Object builder
 
     Boolean isBooleanType() {
-        if (typeClass == java.lang.Boolean || typeClassName == 'java.lang.Boolean') {
+        if (typeClass == Boolean || typeClassName == 'java.lang.Boolean') {
             return true
         }
     }

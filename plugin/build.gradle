@@ -49,15 +49,11 @@ bootRun {
 bootRepackage.enabled = false
 
 ext.codenarcRuleset= '''
-  getRule('LineLength').enabled = false
   getRule('CyclomaticComplexity').enabled = false
   getRule('NoWildcardImports').enabled = false
-  getRule('UnnecessaryDotClass').enabled = false
   getRule('CatchException').enabled = false
   getRule('AbcMetric').enabled = false
   getRule('MethodSize').enabled = false
-  getRule('InvertedIfElse').enabled = false
-  //getRule('Println').enabled = false
 '''
 
 

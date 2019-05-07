@@ -31,7 +31,8 @@ enum ReportFormat {
     /**
      * valueOf using toString.toUpperCase() of passed object
      */
-    public static ReportFormat get(nm) {
+    @SuppressWarnings(['ReturnNullFromCatchBlock'])
+    public static ReportFormat get(Object nm) {
         try {
             return valueOf(nm.toString().toUpperCase())
         } catch (IllegalArgumentException e) {

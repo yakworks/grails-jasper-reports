@@ -66,7 +66,7 @@ public class JasperViewResolver extends LoaderUrlBasedViewResolver {
      */
     @Override
     protected Class<?> requiredViewClass() {
-        return AbstractJasperReportsView.class
+        return AbstractJasperReportsView
     }
 
     @Override
