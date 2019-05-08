@@ -61,10 +61,10 @@ jobs:
       - store_test_results:
           path: plugin/build/test-results
       - store_artifacts:
-          path: test-projects/app/build/reports/tests
+          path: examples/app/build/reports/tests
           destination: test-reports/integration
       - store_test_results:
-          path: test-projects/app/build/test-results
+          path: examples/app/build/test-results
 
       ### Finally do the build and publish. ciPublish will check if this is a PR or on a branch that should not be published
       - run:
