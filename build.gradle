@@ -34,10 +34,6 @@ subprojects {
 
             runtime "com.h2database:h2"
 
-            compile "org.grails.plugins:hibernate5"
-            compile "org.hibernate:hibernate-core:$versionHibernate"
-            compile "org.hibernate:hibernate-ehcache:$versionHibernate"
-
             testCompile "org.grails:grails-plugin-testing"
 
             testCompile "org.grails:grails-gorm-testing-support"

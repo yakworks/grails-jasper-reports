@@ -16,6 +16,10 @@ dependencies {
     provided "org.springframework.boot:spring-boot-starter-tomcat"
 
     provided "org.codehaus.groovy:groovy-ant"
+
+    compile "org.grails.plugins:hibernate5"
+    compile "org.hibernate:hibernate-core:$versionHibernate"
+    compile "org.hibernate:hibernate-ehcache:$versionHibernate"
 }
 
 bootRun {
