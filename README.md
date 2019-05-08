@@ -6,7 +6,7 @@ see branch and versions 3.0.x - Works with Grails 3.2.x
 Install for grails 3.3.x
 
 ```
-compile "org.grails.plugins:jasper-reports:3.1.2"
+compile "org.grails.plugins:jasper-reports:3.2.0"
 ```
 
 
