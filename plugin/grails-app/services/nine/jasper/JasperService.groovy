@@ -1,10 +1,15 @@
+/*
+* Copyright 2019 Yak.Works - Licensed under the Apache License, Version 2.0 (the "License")
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 package nine.jasper
 
 import groovy.transform.CompileDynamic
+
 import net.sf.jasperreports.engine.JasperReport
+import nine.jasper.spring.JasperReportDef
 import nine.jasper.spring.JasperView
 import nine.jasper.spring.JasperViewResolver
-import nine.jasper.spring.JasperReportDef
 
 /**
  * @author Sudhir Nimavat

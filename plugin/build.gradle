@@ -37,7 +37,7 @@ dependencies {
         exclude module: 'batik-bridge' //don't need the barcode stuff
     }
 
-    compile 'org.grails.plugins:view-tools:1.2-SNAPSHOT'
+    compile 'org.grails.plugins:view-tools:1.2.0'
     testCompile "org.grails:grails-plugin-testing"
 }
 
@@ -55,7 +55,6 @@ ext.codenarcRuleset= '''
   getRule('AbcMetric').enabled = false
   getRule('MethodSize').enabled = false
 '''
-
 
 codenarcMain {
     exclude '**/BootStrap.groovy'

@@ -1,12 +1,18 @@
+/*
+* Copyright 2019 Yak.Works - Licensed under the Apache License, Version 2.0 (the "License")
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 package nine.reports
 
-import grails.util.GrailsNameUtils
-import grails.util.Holders
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
+
 import org.grails.datastore.mapping.model.PersistentEntity
 import org.grails.datastore.mapping.model.PersistentProperty
 import org.grails.datastore.mapping.model.types.Association
+
+import grails.util.GrailsNameUtils
+import grails.util.Holders
 
 import static grails.util.GrailsClassUtils.isAssignableOrConvertibleFrom
 

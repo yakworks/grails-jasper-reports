@@ -1,26 +1,19 @@
 buildscript {
     repositories {
         mavenLocal()
+        maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://repo.grails.org/grails/core" }
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-        classpath "org.yakworks:gradle-plugins:0.1.45"
+        classpath "org.yakworks:gradle-plugins:1.1.3"
     }
 }
 
-apply plugin: 'yakworks.shipkit'
-
-repositories {
-    mavenLocal()
-    maven { url "https://repo.grails.org/grails/core" }
-    maven { url "http://repo.9ci.com/oss-snapshots" }
-}
+apply plugin: 'yakworks.shipyak'
 
 subprojects {
-    apply plugin: 'groovy'
     plugins.withId('java') {
-
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
 
@@ -38,7 +31,7 @@ subprojects {
             compile "org.grails:grails-web-boot"
             compile "org.grails.plugins:cache"
 
-            runtime "com.h2database:h2"
+            testRuntime "com.h2database:h2"
 
             compile "org.grails.plugins:hibernate5"
             compile "org.hibernate:hibernate-core:$versionHibernate"

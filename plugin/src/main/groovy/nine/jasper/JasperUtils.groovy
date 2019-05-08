@@ -1,9 +1,28 @@
+/*
+* Copyright 2019 Yak.Works - Licensed under the Apache License, Version 2.0 (the "License")
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 package nine.jasper
+
+import java.sql.Connection
+import java.sql.SQLException
+import javax.sql.DataSource
 
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import groovy.util.logging.Slf4j
+
+import org.springframework.context.ApplicationContextException
+import org.springframework.core.io.FileSystemResource
+import org.springframework.core.io.Resource
+import org.springframework.core.io.UrlResource
+import org.springframework.dao.DataAccessException
+import org.springframework.dao.DataRetrievalFailureException
+import org.springframework.jdbc.datasource.DataSourceUtils
+import org.springframework.util.CollectionUtils
+import org.springframework.util.StringUtils
+
 import net.sf.jasperreports.engine.*
 import net.sf.jasperreports.engine.data.JRBeanArrayDataSource
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
@@ -17,19 +36,6 @@ import net.sf.jasperreports.export.SimpleHtmlExporterConfiguration
 import net.sf.jasperreports.export.SimpleHtmlExporterOutput
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput
 import nine.reports.ReportFormat
-import org.springframework.context.ApplicationContextException
-import org.springframework.core.io.FileSystemResource
-import org.springframework.core.io.Resource
-import org.springframework.core.io.UrlResource
-import org.springframework.dao.DataAccessException
-import org.springframework.dao.DataRetrievalFailureException
-import org.springframework.jdbc.datasource.DataSourceUtils
-import org.springframework.util.CollectionUtils
-import org.springframework.util.StringUtils
-
-import javax.sql.DataSource
-import java.sql.Connection
-import java.sql.SQLException
 
 /**
  * Utility methods for working with JasperReports. Provides a set of convenience
