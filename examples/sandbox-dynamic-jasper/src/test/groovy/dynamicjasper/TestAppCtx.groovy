@@ -1,7 +1,7 @@
 package dynamicjasper
 
-import nine.jasper.spring.JasperView
-import nine.jasper.spring.JasperViewResolver
+import yakworks.jasper.spring.JasperView
+import yakworks.jasper.spring.JasperViewResolver
 import org.grails.gsp.GroovyPageResourceLoader
 import org.springframework.core.io.UrlResource
 

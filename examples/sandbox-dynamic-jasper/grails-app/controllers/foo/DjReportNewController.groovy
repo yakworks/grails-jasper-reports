@@ -1,4 +1,7 @@
 package foo
+import org.apache.commons.lang.StringUtils
+import org.grails.core.artefact.DomainClassArtefactHandler
+
 import ar.com.fdvs.dj.core.DynamicJasperHelper
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager
 import ar.com.fdvs.dj.domain.ColumnProperty
@@ -15,15 +18,13 @@ import ar.com.fdvs.dj.domain.entities.columns.SimpleColumn
 import ar.com.fdvs.dj.output.ReportWriter
 import ar.com.fdvs.dj.output.ReportWriterFactory
 import grails.core.GrailsApplication
+import grails.core.GrailsClass
+import grails.plugins.GrailsPluginManager
 import grails.util.GrailsUtil
 import net.sf.jasperreports.engine.JRDataSource
 import net.sf.jasperreports.engine.JasperPrint
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
 import net.sf.jasperreports.engine.export.JRHtmlExporterParameter
-import org.apache.commons.lang.StringUtils
-import org.grails.core.artefact.DomainClassArtefactHandler
-import grails.core.GrailsClass
-import grails.plugins.GrailsPluginManager
 
 class DjReportNewController {
     GrailsPluginManager pluginManager

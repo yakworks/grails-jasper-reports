@@ -5,17 +5,11 @@ buildscript {
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-        classpath "org.yakworks:gradle-plugins:0.1.45"
+        classpath "org.yakworks:gradle-plugins:1.1.3"
     }
 }
 
-apply plugin: 'yakworks.shipkit'
-
-repositories {
-    mavenLocal()
-    maven { url "https://repo.grails.org/grails/core" }
-    maven { url "http://repo.9ci.com/oss-snapshots" }
-}
+apply plugin: 'yakworks.shipyak'
 
 subprojects {
     apply plugin: 'groovy'
@@ -39,10 +33,6 @@ subprojects {
             compile "org.grails.plugins:cache"
 
             runtime "com.h2database:h2"
-
-            compile "org.grails.plugins:hibernate5"
-            compile "org.hibernate:hibernate-core:$versionHibernate"
-            compile "org.hibernate:hibernate-ehcache:$versionHibernate"
 
             testCompile "org.grails:grails-plugin-testing"
 

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperPrint xmlns="http://jasperreports.sourceforge.net/jasperreports/print" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/print http://jasperreports.sourceforge.net/xsd/jasperprint.xsd" name="NestProps" pageWidth="595" pageHeight="842" topMargin="50" leftMargin="40" bottomMargin="50" rightMargin="40" locale="en_US" timezone="America/Denver">
+	<property name="net.sf.jasperreports.export.xml.start.page.index" value="0"/>
+	<property name="net.sf.jasperreports.export.xml.end.page.index" value="0"/>
+	<property name="net.sf.jasperreports.export.xml.page.count" value="1"/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+	<origin group="CityGroup" band="groupHeader"/>
+	<origin group="CityGroup" band="groupFooter"/>
+	<origin band="title"/>
+	<origin band="pageHeader"/>
+	<origin band="detail"/>
+	<origin band="pageFooter"/>
+	<origin band="lastPageFooter"/>
+	<style name="Sans_Normal" isDefault="true" fontName="DejaVu Sans" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Sans_Bold" fontName="DejaVu Sans" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Sans_Italic" fontName="DejaVu Sans" fontSize="12" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+	<bookmark label="Title" pageIndex="0" elementAddress="1"/>
+	<bookmark label="Berne" pageIndex="0" elementAddress="7">
+		<bookmark label="Bill Ott (22)" pageIndex="0" elementAddress="8"/>
+	</bookmark>
+	<bookmark label="Chicago" pageIndex="0" elementAddress="14">
+		<bookmark label="Joshua Burnett (1)" pageIndex="0" elementAddress="15"/>
+	</bookmark>
+	<bookmark label="Summary" pageIndex="0" elementAddress="21"/>
+	<page>
+		<line>
+			<reportElement uuid="4058d4f4-b73d-4f3f-80db-3b2857ffb945" x="40" y="50" width="515" height="1" origin="2" srcId="4" printId="1"/>
+		</line>
+		<text textAlignment="Center" textHeight="25.609375" lineSpacingFactor="1.1640625" leadingOffset="-5.1884766" anchorName="Title" bookmarkLevel="1">
+			<reportElement uuid="fe78690f-568a-4de4-950e-2355cbc905f1" style="Sans_Normal" x="40" y="60" width="515" height="30" origin="2" srcId="5" printId="1"/>
+			<font size="22"/>
+			<textContent><![CDATA[NestProps Report]]></textContent>
+		</text>
+		<text textAlignment="Center" textHeight="16.296875" lineSpacingFactor="1.1640625" leadingOffset="-3.3017578">
+			<reportElement uuid="bcfe3ef0-4acf-4d71-9781-24c1aa04a231" style="Sans_Normal" x="40" y="90" width="515" height="20" origin="2" srcId="6" printId="1"/>
+			<font size="14"/>
+			<textContent><![CDATA[CustomBeanFactory.listMap]]></textContent>
+		</text>
+		<text textAlignment="Center" textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781">
+			<reportElement uuid="d0bda39f-a3d6-445f-9253-f156c802c4c2" style="Sans_Bold" mode="Opaque" x="40" y="125" width="55" height="15" forecolor="#FFFFFF" backcolor="#333333" origin="3" srcId="7" printId="1"/>
+			<textContent><![CDATA[ID]]></textContent>
+		</text>
+		<text textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781">
+			<reportElement uuid="402baff8-c1df-4c1b-bfcb-0f21529cbf04" style="Sans_Bold" mode="Opaque" x="95" y="125" width="205" height="15" forecolor="#FFFFFF" backcolor="#333333" origin="3" srcId="8" printId="1"/>
+			<textContent><![CDATA[Name]]></textContent>
+		</text>
+		<text textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781">
+			<reportElement uuid="b5ff5de3-a2b4-44de-b030-004f471f9b41" style="Sans_Bold" mode="Opaque" x="300" y="125" width="255" height="15" forecolor="#FFFFFF" backcolor="#333333" origin="3" srcId="9" printId="1"/>
+			<textContent><![CDATA[Street]]></textContent>
+		</text>
+		<text textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781">
+			<reportElement uuid="b5ff5de3-a2b4-44de-b030-004f471f9b41" style="Sans_Bold" mode="Opaque" x="300" y="125" width="255" height="15" forecolor="#FFFFFF" backcolor="#333333" origin="3" srcId="10" printId="1"/>
+			<textContent><![CDATA[Country]]></textContent>
+		</text>
+		<text textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781" anchorName="Berne" bookmarkLevel="1">
+			<reportElement uuid="db27978d-5882-4541-8ec1-ccb9211edb17" style="Sans_Bold" mode="Opaque" x="40" y="145" width="515" height="15" backcolor="#C0C0C0" origin="0" srcId="1" printId="1"/>
+			<box leftPadding="10">
+				<bottomPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[  1. Berne]]></textContent>
+		</text>
+		<text textAlignment="Right" textHeight="13.96875" markup="html" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781" anchorName="Bill Ott (22)" bookmarkLevel="2" valueClass="java.lang.Integer">
+			<reportElement uuid="bb195136-2738-4182-a1b0-00d1ca640bdd" x="40" y="160" width="50" height="15" origin="4" srcId="11" printId="1">
+				<property name="net.sf.jasperreports.export.html.class" value="red uppercase"/>
+				<property name="net.sf.jasperreports.export.html.id" value="id"/>
+			</reportElement>
+			<box leftPadding="10" rightPadding="10">
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+			</box>
+			<textContent><![CDATA[22]]></textContent>
+		</text>
+		<text textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781" hyperlinkType="Reference" hyperlinkReference="https://www.google.com/search?q=Bill Ott">
+			<reportElement uuid="b98b57f4-ebed-4a29-b69f-b243445bff2d" x="90" y="160" width="200" height="15" origin="4" srcId="12" printId="1"/>
+			<box leftPadding="10" rightPadding="10">
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+			</box>
+			<textContent><![CDATA[Bill Ott]]></textContent>
+		</text>
+		<text textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781">
+			<reportElement uuid="f3f2f70e-3138-4834-840c-a87253f1dc30" x="290" y="160" width="265" height="15" origin="4" srcId="13" printId="1"/>
+			<box leftPadding="10" rightPadding="10">
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+			<textContent><![CDATA[US]]></textContent>
+		</text>
+		<text textHeight="27.9375" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781">
+			<reportElement uuid="1f8c9385-4048-40b0-8e91-52f0bcd5e6c6" x="555" y="160" width="15" height="27" origin="4" srcId="14" printId="1"/>
+			<box leftPadding="10" rightPadding="10">
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+			<textContent><![CDATA[US]]></textContent>
+		</text>
+		<text textAlignment="Right" textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781">
+			<reportElement uuid="6e23dcca-2a97-4184-888e-4d04a09337ad" style="Sans_Bold" x="440" y="188" width="60" height="15" origin="1" srcId="2" printId="1"/>
+			<textContent><![CDATA[Count :]]></textContent>
+		</text>
+		<text textAlignment="Right" textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781" valueClass="java.lang.Integer">
+			<reportElement uuid="65fe9e14-560b-45cd-9c0e-e190c8464296" style="Sans_Bold" x="500" y="188" width="30" height="15" origin="1" srcId="3" printId="1"/>
+			<textContent><![CDATA[1]]></textContent>
+		</text>
+		<text textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781" anchorName="Chicago" bookmarkLevel="1">
+			<reportElement uuid="db27978d-5882-4541-8ec1-ccb9211edb17" style="Sans_Bold" mode="Opaque" x="40" y="212" width="515" height="15" backcolor="#C0C0C0" origin="0" srcId="1" printId="2"/>
+			<box leftPadding="10">
+				<bottomPen lineWidth="1.0"/>
+			</box>
+			<textContent><![CDATA[  2. Chicago]]></textContent>
+		</text>
+		<text textAlignment="Right" textHeight="13.96875" markup="html" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781" anchorName="Joshua Burnett (1)" bookmarkLevel="2" valueClass="java.lang.Integer">
+			<reportElement uuid="bb195136-2738-4182-a1b0-00d1ca640bdd" x="40" y="227" width="50" height="15" origin="4" srcId="11" printId="2">
+				<property name="net.sf.jasperreports.export.html.class" value="red uppercase"/>
+				<property name="net.sf.jasperreports.export.html.id" value="id"/>
+			</reportElement>
+			<box leftPadding="10" rightPadding="10">
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+			</box>
+			<textContent><![CDATA[1]]></textContent>
+		</text>
+		<text textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781" hyperlinkType="Reference" hyperlinkReference="https://www.google.com/search?q=Joshua Burnett">
+			<reportElement uuid="b98b57f4-ebed-4a29-b69f-b243445bff2d" x="90" y="227" width="200" height="15" origin="4" srcId="12" printId="2"/>
+			<box leftPadding="10" rightPadding="10">
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+			</box>
+			<textContent><![CDATA[Joshua Burnett]]></textContent>
+		</text>
+		<text textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781">
+			<reportElement uuid="f3f2f70e-3138-4834-840c-a87253f1dc30" x="290" y="227" width="265" height="15" origin="4" srcId="13" printId="2"/>
+			<box leftPadding="10" rightPadding="10">
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+			<textContent><![CDATA[US]]></textContent>
+		</text>
+		<text textHeight="27.9375" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781">
+			<reportElement uuid="1f8c9385-4048-40b0-8e91-52f0bcd5e6c6" x="555" y="227" width="15" height="27" origin="4" srcId="14" printId="2"/>
+			<box leftPadding="10" rightPadding="10">
+				<leftPen lineWidth="0.5"/>
+				<bottomPen lineWidth="0.5"/>
+				<rightPen lineWidth="0.5"/>
+			</box>
+			<textContent><![CDATA[US]]></textContent>
+		</text>
+		<text textAlignment="Right" textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781">
+			<reportElement uuid="6e23dcca-2a97-4184-888e-4d04a09337ad" style="Sans_Bold" x="440" y="255" width="60" height="15" origin="1" srcId="2" printId="2"/>
+			<textContent><![CDATA[Count :]]></textContent>
+		</text>
+		<text textAlignment="Right" textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781" valueClass="java.lang.Integer">
+			<reportElement uuid="65fe9e14-560b-45cd-9c0e-e190c8464296" style="Sans_Bold" x="500" y="255" width="30" height="15" origin="1" srcId="3" printId="2"/>
+			<textContent><![CDATA[1]]></textContent>
+		</text>
+		<text textAlignment="Center" textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781" anchorName="Summary" bookmarkLevel="1">
+			<reportElement uuid="0b75977e-3952-45e5-9c2d-67083702af6e" x="40" y="742" width="515" height="15" origin="6" srcId="18" printId="1"/>
+			<textContent><![CDATA[There were 2 address records on this report.]]></textContent>
+		</text>
+		<line>
+			<reportElement uuid="180900c2-a45d-4c85-82c3-286a4149f2a0" x="40" y="762" width="515" height="1" origin="6" srcId="19" printId="1"/>
+		</line>
+		<text textAlignment="Right" textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781">
+			<reportElement uuid="fede74ae-ec9d-4a5d-bcb8-affc9933fcc3" x="240" y="772" width="80" height="15" origin="6" srcId="20" printId="1"/>
+			<textContent><![CDATA[Page 1 of]]></textContent>
+		</text>
+		<text textHeight="13.96875" lineSpacingFactor="1.1640625" leadingOffset="-2.8300781">
+			<reportElement uuid="132ec5c3-9bb2-4d54-9362-523043a658bd" x="320" y="772" width="75" height="15" origin="6" srcId="21" printId="1"/>
+			<textContent><![CDATA[ 1]]></textContent>
+		</text>
+	</page>
+</jasperPrint>

@@ -27,8 +27,8 @@ import net.sf.jasperreports.engine.JasperFillManager
 import net.sf.jasperreports.engine.JasperPrint
 import net.sf.jasperreports.engine.JasperReport
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
-import nine.jasper.JasperUtils
-import nine.jasper.spring.JasperViewResolver
+import yakworks.jasper.JasperUtils
+import yakworks.jasper.spring.JasperViewResolver
 import spock.lang.Specification
 
 import java.awt.Color
@@ -111,18 +111,18 @@ class GroupsReportsSpec extends Specification implements ControllerUnitTest<Repo
     }
 
     protected void exportReport() throws Exception {
-        ReportExporter.exportReport(jp, "target/dynamic/" + this.getClass().getSimpleName() + ".pdf");
+        ReportExporter.exportReport(jp, "test-reports/" + this.getClass().getSimpleName() + ".pdf");
         exportToJRXML();
-        JasperUtils.createExporterHTML(jp,new File("target/dynamic/" + this.getClass().getSimpleName() + ".html ")).exportReport()
-        ReportExporter.exportReport(jp, "target/dynamic/" + this.getClass().getSimpleName() + ".pdf");
+        JasperUtils.createExporterHTML(jp,new File("test-reports/" + this.getClass().getSimpleName() + ".html ")).exportReport()
+        ReportExporter.exportReport(jp, "test-reports/" + this.getClass().getSimpleName() + ".pdf");
     }
 
     protected void exportToJRXML() throws Exception {
         if (this.jr != null){
-            DynamicJasperHelper.generateJRXML(this.jr, "UTF-8","target/dynamic/" + this.getClass().getSimpleName() + ".jrxml");
+            DynamicJasperHelper.generateJRXML(this.jr, "UTF-8","test-reports/" + this.getClass().getSimpleName() + ".jrxml");
 
         } else {
-            DynamicJasperHelper.generateJRXML(this.dr, new ClassicLayoutManager(), this.rparams, "UTF-8","target/dynamic/" + this.getClass().getSimpleName() + ".jrxml");
+            DynamicJasperHelper.generateJRXML(this.dr, new ClassicLayoutManager(), this.rparams, "UTF-8","test-reports/" + this.getClass().getSimpleName() + ".jrxml");
         }
     }
 

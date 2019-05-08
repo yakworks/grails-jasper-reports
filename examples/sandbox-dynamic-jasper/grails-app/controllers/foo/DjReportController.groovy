@@ -1,5 +1,11 @@
 package foo
 
+import java.awt.*
+import java.util.List
+
+import org.apache.commons.lang.StringUtils
+import org.grails.core.artefact.DomainClassArtefactHandler
+
 import ar.com.fdvs.dj.core.DynamicJasperHelper
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager
 import ar.com.fdvs.dj.domain.*
@@ -20,13 +26,8 @@ import grails.util.GrailsUtil
 import net.sf.jasperreports.engine.JRDataSource
 import net.sf.jasperreports.engine.JasperReport
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
-import nine.jasper.spring.JasperView
-import nine.jasper.spring.JasperViewResolver
-import org.apache.commons.lang.StringUtils
-import org.grails.core.artefact.DomainClassArtefactHandler
-
-import java.awt.*
-import java.util.List
+import yakworks.jasper.spring.JasperView
+import yakworks.jasper.spring.JasperViewResolver
 
 class DjReportController {
     GrailsPluginManager pluginManager
