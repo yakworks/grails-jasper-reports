@@ -1,4 +1,4 @@
-package dynamicjasper
+package yakworks.jasper
 
 import yakworks.jasper.spring.JasperView
 import yakworks.jasper.spring.JasperViewResolver
@@ -9,7 +9,6 @@ import org.springframework.core.io.UrlResource
  * Created by basejump on 10/14/16.
  */
 class TestAppCtx {
-
     static Closure doWithSpring = {
         def baseRes =  new UrlResource("file:.")// as Resource
         GroovyPageResourceLoader srl = new GroovyPageResourceLoader(baseResource:baseRes)

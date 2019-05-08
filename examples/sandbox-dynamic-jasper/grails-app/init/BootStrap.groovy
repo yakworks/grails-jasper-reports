@@ -1,4 +1,4 @@
-import nine.reports.SeedData
+import yakworks.reports.SeedData
 
 class BootStrap {
     static Random rand = new Random()

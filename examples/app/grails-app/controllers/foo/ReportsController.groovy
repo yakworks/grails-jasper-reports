@@ -1,6 +1,6 @@
 package foo
 
-import nine.reports.ReportFormat
+import yakworks.reports.ReportFormat
 
 class ReportsController {
 

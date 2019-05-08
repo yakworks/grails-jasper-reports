@@ -26,8 +26,8 @@ import grails.util.GrailsUtil
 import net.sf.jasperreports.engine.JRDataSource
 import net.sf.jasperreports.engine.JasperReport
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
-import nine.jasper.spring.JasperView
-import nine.jasper.spring.JasperViewResolver
+import yakworks.jasper.spring.JasperView
+import yakworks.jasper.spring.JasperViewResolver
 
 class DjReportController {
     GrailsPluginManager pluginManager

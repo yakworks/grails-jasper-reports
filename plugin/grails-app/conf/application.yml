@@ -2,7 +2,7 @@
 grails:
     profile: web-plugin
     codegen:
-        defaultPackage: nine.jasper
+        defaultPackage: yakworks.jasper
     spring:
         transactionManagement:
             proxies: false

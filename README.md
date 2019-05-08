@@ -67,9 +67,9 @@ It is also possible to render reports programmatically using ```JasperService```
 
 class ReportController {
 
-import nine.jasper.JasperService
-import nine.jasper.spring.JasperReportDef
-import nine.reports.ReportFormat
+import yakworks.jasper.JasperService
+import yakworks.jasper.spring.JasperReportDef
+import yakworks.reports.ReportFormat
 
 
    def generate(String name) {
