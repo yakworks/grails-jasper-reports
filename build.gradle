@@ -5,17 +5,11 @@ buildscript {
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-        classpath "org.yakworks:gradle-plugins:0.1.45"
+        classpath "org.yakworks:gradle-plugins:1.1.3"
     }
 }
 
-apply plugin: 'yakworks.shipkit'
-
-repositories {
-    mavenLocal()
-    maven { url "https://repo.grails.org/grails/core" }
-    maven { url "http://repo.9ci.com/oss-snapshots" }
-}
+apply plugin: 'yakworks.shipyak'
 
 subprojects {
     apply plugin: 'groovy'

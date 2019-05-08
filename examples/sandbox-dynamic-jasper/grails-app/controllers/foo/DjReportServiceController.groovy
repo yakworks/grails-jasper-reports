@@ -1,18 +1,19 @@
 package foo
 
+import org.grails.core.artefact.DomainClassArtefactHandler
+
 import ar.com.fdvs.dj.core.DynamicJasperHelper
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager
 import ar.com.fdvs.dj.domain.DynamicReport
 import grails.core.GrailsApplication
+import grails.core.GrailsClass
+import grails.plugins.GrailsPluginManager
 import net.sf.jasperreports.engine.JRDataSource
 import net.sf.jasperreports.engine.JasperReport
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
 import nine.jasper.DynamicJasperService
 import nine.jasper.spring.JasperView
 import nine.jasper.spring.JasperViewResolver
-import org.grails.core.artefact.DomainClassArtefactHandler
-import grails.core.GrailsClass
-import grails.plugins.GrailsPluginManager
 
 class DjReportServiceController {
     GrailsPluginManager pluginManager

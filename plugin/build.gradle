@@ -56,18 +56,6 @@ ext.codenarcRuleset= '''
   getRule('MethodSize').enabled = false
 '''
 
-
-codenarcMain {
-    exclude '**/BootStrap.groovy'
-    exclude '**/GormToolsGrailsPlugin.groovy'
-    exclude '**/GormToolsPluginHelper.groovy'
-}
-
-codenarcTest {
-    exclude '**/*'
-    ignoreFailures = true
-}
-
 codenarcIntegrationTest {
     exclude '**/*'
     ignoreFailures = true

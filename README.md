@@ -4,6 +4,10 @@
 version 3.0.x - Works with Grails 3.2.x
 version 3.1.x - is for grails 3.3.x
 
+```
+compile "org.grails.plugins:jasper-reports:3.1.2"
+```
+
 
 ## Table of Contents
 <!-- this is using the Sublime MarkdownTOC plugin to auto update it -->

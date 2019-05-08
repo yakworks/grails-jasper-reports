@@ -1,5 +1,13 @@
 package nine.jasper
 
+import java.awt.*
+import java.util.List
+
+import groovy.util.logging.Slf4j
+
+import org.apache.commons.lang.StringUtils
+import org.grails.core.artefact.DomainClassArtefactHandler
+
 import ar.com.fdvs.dj.domain.*
 import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder
 import ar.com.fdvs.dj.domain.constants.*
@@ -13,12 +21,6 @@ import grails.core.GrailsDomainClass
 import grails.core.GrailsDomainClassProperty
 import grails.util.GrailsClassUtils
 import grails.util.GrailsUtil
-import groovy.util.logging.Slf4j
-import org.apache.commons.lang.StringUtils
-import org.grails.core.artefact.DomainClassArtefactHandler
-
-import java.awt.*
-import java.util.List
 
 import static GrailsClassUtils.isAssignableOrConvertibleFrom
 

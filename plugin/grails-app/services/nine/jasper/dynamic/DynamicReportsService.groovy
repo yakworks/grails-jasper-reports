@@ -1,9 +1,16 @@
+/*
+* Copyright 2019 Yak.Works - Licensed under the Apache License, Version 2.0 (the "License")
+* You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+*/
 package nine.jasper.dynamic
+
+import groovy.transform.CompileDynamic
+import groovy.util.logging.Slf4j
+
+import org.grails.datastore.mapping.model.PersistentEntity
 
 import grails.core.GrailsApplication
 import grails.util.GrailsUtil
-import groovy.transform.CompileDynamic
-import groovy.util.logging.Slf4j
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder
 import net.sf.dynamicreports.report.builder.HyperLinkBuilder
 import net.sf.dynamicreports.report.builder.column.ColumnBuilder
@@ -22,7 +29,6 @@ import net.sf.dynamicreports.report.constant.PageOrientation
 import net.sf.dynamicreports.report.constant.PageType
 import nine.reports.DomainMetaUtils
 import nine.reports.FieldMetadata
-import org.grails.datastore.mapping.model.PersistentEntity
 
 import static net.sf.dynamicreports.report.builder.DynamicReports.hyperLink
 
