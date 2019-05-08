@@ -1,8 +1,9 @@
-![CircleCI](https://img.shields.io/circleci/project/github/yakworks/grails-jasper-reports.svg?longCache=true&style=for-the-badge)
+[![CircleCI](https://img.shields.io/circleci/project/github/yakworks/grails-jasper-reports/master.svg?longCache=true&style=for-the-badge&logo=circleci)](https://circleci.com/gh/yakworks/grails-jasper-reports)
+[![9ci](https://img.shields.io/badge/BUILT%20BY-9ci%20Inc-blue.svg?longCache=true&style=for-the-badge)](http://9ci.com)
 
+see branch and versions 3.0.x - Works with Grails 3.2.x
 
-version 3.0.x - Works with Grails 3.2.x
-version 3.1.x - is for grails 3.3.x
+Install for grails 3.3.x
 
 ```
 compile "org.grails.plugins:jasper-reports:3.1.2"
