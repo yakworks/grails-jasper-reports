@@ -15,13 +15,14 @@ import spock.lang.Specification
  */
 class JasperViewNoRequestSpec extends Specification implements GrailsUnitTest {
 
+    static String TEST_JASPER_DIR = "src/test/resources/jasper"
     Closure doWithSpring() { return TestAppCtx.doWithSpring }
 
     ViewResourceLocator jasperViewResourceLocator //= ViewResourceLocator.mockForTest()
     JasperViewResolver jasperViewResolver
 
     void setupSpec() {
-        new File("target/jasper").mkdirs()
+        new File(TEST_JASPER_DIR).mkdirs()
     }
 
     static List<Map> dataList = [
@@ -57,12 +58,12 @@ class JasperViewNoRequestSpec extends Specification implements GrailsUnitTest {
         where:
         format  | output                                | contentMethod | startsWith
         "pdf"   | new ByteArrayOutputStream()           | "toString"    | "%PDF"
-        "pdf"   | new File("target/jasper/testme.pdf")  | "getText"     |"%PDF"
+        "pdf"   | new File("$TEST_JASPER_DIR/testme.pdf")  | "getText"     |"%PDF"
         "html"  | new StringWriter()                    | "toString"    |"<!DOCTYPE html"
         "html"  | new ByteArrayOutputStream()           | "toString"    |"<!DOCTYPE html"
         null    | new StringWriter()                    | "toString"    |"<!DOCTYPE html"
         "xlsx"  | new ByteArrayOutputStream()           | "toByteArray" | ""
-        "xlsx"  | new File("target/jasper/testme.xlsx") | "getBytes"    | ""
+        "xlsx"  | new File("$TEST_JASPER_DIR/testme.xlsx") | "getBytes"    | ""
 
     }
 
@@ -74,7 +75,7 @@ class JasperViewNoRequestSpec extends Specification implements GrailsUnitTest {
             people: CustomBeanFactory.beanCollection,
             format:format
         ]
-        File f = new File("target/jasper/contactReport.$format")
+        File f = new File("$TEST_JASPER_DIR/contactReport.$format")
         if(!f.exists())f.createNewFile()
         view.render(model, f)
 

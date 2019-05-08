@@ -18,6 +18,7 @@ import spock.lang.Specification
  */
 class RunCustomSpec extends Specification implements GrailsUnitTest{
 
+    static String TEST_JASPER_DIR = "src/test/resources/jasper"
 
     void "test something"() {
         expect:
@@ -43,10 +44,10 @@ class RunCustomSpec extends Specification implements GrailsUnitTest{
         long start = System.currentTimeMillis();
         //Preparing parameters
         Map parameters = ["ReportTitle":"Address Report", "DataFile": "CustomBeanFactory.java - Bean Collection"]
-        new File("target/jasper/").mkdirs()
+        new File("$TEST_JASPER_DIR/").mkdirs()
         //parameters.put(JRParameter.IS_IGNORE_PAGINATION, Boolean.TRUE);
         JasperFillManager.fillReportToFile(
-                jreport, "target/jasper/DataSourceReport.jrprint",
+                jreport, "$TEST_JASPER_DIR/DataSourceReport.jrprint",
                 parameters,ds);
         println("Filling time : " + (System.currentTimeMillis() - start));
 
@@ -55,7 +56,7 @@ class RunCustomSpec extends Specification implements GrailsUnitTest{
 
     public void print() throws JRException {
         long start = System.currentTimeMillis();
-        JasperPrintManager.printReport("target/jasper/DataSourceReport.jrprint", false);
+        JasperPrintManager.printReport("$TEST_JASPER_DIR/DataSourceReport.jrprint", false);
         System.err.println("Printing time : " + (System.currentTimeMillis() - start));
     }
 
@@ -63,14 +64,14 @@ class RunCustomSpec extends Specification implements GrailsUnitTest{
     public void pdf() throws JRException
     {
         long start = System.currentTimeMillis();
-        JasperExportManager.exportReportToPdfFile("target/jasper/DataSourceReport.jrprint");
+        JasperExportManager.exportReportToPdfFile("$TEST_JASPER_DIR/DataSourceReport.jrprint");
         System.err.println("PDF creation time : " + (System.currentTimeMillis() - start));
     }
 
     public void xlsx() throws JRException
     {
         long start = System.currentTimeMillis();
-        File sourceFile = new File("target/jasper/DataSourceReport.jrprint");
+        File sourceFile = new File("$TEST_JASPER_DIR/DataSourceReport.jrprint");
 
         JasperPrint jasperPrint = (JasperPrint)JRLoader.loadObject(sourceFile);
         jasperPrint.setProperty("net.sf.jasperreports.export.xls.detect.cell.type", "true");
@@ -96,7 +97,7 @@ class RunCustomSpec extends Specification implements GrailsUnitTest{
     public void html() throws JRException
     {
         long start = System.currentTimeMillis();
-        File sourceFile = new File("target/jasper/DataSourceReport.jrprint");
+        File sourceFile = new File("$TEST_JASPER_DIR/DataSourceReport.jrprint");
         JasperPrint jasperPrint = (JasperPrint)JRLoader.loadObject(sourceFile);
 
         File destFile = new File(sourceFile.getParent(), jasperPrint.getName() + ".html");

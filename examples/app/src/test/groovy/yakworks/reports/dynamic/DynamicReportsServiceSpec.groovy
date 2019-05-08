@@ -32,7 +32,7 @@ class DynamicReportsServiceSpec extends HibernateSpec implements DataTest {
      * - how to use font awesome icons
      *
      */
-    static folder = new File("target/reports/DynamicReportsServiceSpec/");
+    static folder = new File("build/jasper-tests/DynamicReportsServiceSpec/");
 
     void setupSpec() {
         mockDomains(ProductGroup, Customer, Bills, Product)
@@ -70,7 +70,7 @@ class DynamicReportsServiceSpec extends HibernateSpec implements DataTest {
 
         dr.toJrXml(new FileOutputStream(new File(folder, "${fname}.jrxml")))
 
-        "open target/reports/DynamicReportsServiceSpec/${fname}.html".execute()
+        "open build/jasper-tests/DynamicReportsServiceSpec/${fname}.html".execute()
     }
 
     @Ignore("https://github.com/yakworks/grails-jasper-reports/issues/11")

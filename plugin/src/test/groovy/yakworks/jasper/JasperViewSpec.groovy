@@ -17,6 +17,7 @@ import spock.lang.Specification
  * Playground for various features.
  */
 class JasperViewSpec extends Specification implements GrailsWebUnitTest {
+    static String TEST_JASPER_DIR = "src/test/resources/jasper"
 
     Closure doWithSpring() {
       return TestAppCtx.doWithSpring
@@ -102,7 +103,7 @@ class JasperViewSpec extends Specification implements GrailsWebUnitTest {
         when:
         View view = jasperViewResolver.resolveViewName(viewName,null)
         model << [format:"XLSX"]
-        new File("target/jasper/").mkdir()
+        new File("$TEST_JASPER_DIR/").mkdir()
 
         then:
         view.render(model, request, response)
@@ -111,7 +112,7 @@ class JasperViewSpec extends Specification implements GrailsWebUnitTest {
 
         //write to file
 
-        def fos = new FileOutputStream("target/jasper/testme.xlsx")
+        def fos = new FileOutputStream("$TEST_JASPER_DIR/testme.xlsx")
         // Output the ByteArrayOutputStream buffer to it
         fos << response.contentAsByteArray
         // Close the stream und underlying file

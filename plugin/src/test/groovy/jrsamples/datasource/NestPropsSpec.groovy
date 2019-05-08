@@ -14,6 +14,8 @@ import spock.lang.Specification
  */
 class NestPropsSpec extends Specification implements GrailsUnitTest {
 
+    static String TEST_JASPER_DIR = "src/test/resources/jasper"
+
     void "test this"() {
         expect:
         runReport()
@@ -40,10 +42,10 @@ class NestPropsSpec extends Specification implements GrailsUnitTest {
         long start = System.currentTimeMillis();
         //Preparing parameters
         Map parameters = ["ReportTitle":"NestProps Report", "DataFile": "CustomBeanFactory.listMap"]
-        new File("target/jasper/").mkdirs()
-        assert(new File("target/jasper/")).exists()
+        new File("$TEST_JASPER_DIR/").mkdirs()
+        assert(new File("$TEST_JASPER_DIR/")).exists()
         JasperFillManager.fillReportToFile(
-                jreport, "target/jasper/NestProps.jrprint",
+                jreport, "$TEST_JASPER_DIR/NestProps.jrprint",
                 parameters,ds);
         println("Filling time : " + (System.currentTimeMillis() - start));
         //JasperUtil.exportReportToPdfFile()
@@ -53,7 +55,7 @@ class NestPropsSpec extends Specification implements GrailsUnitTest {
     public void pdf() throws JRException
     {
         long start = System.currentTimeMillis();
-        JasperExportManager.exportReportToPdfFile("target/jasper/NestProps.jrprint");
+        JasperExportManager.exportReportToPdfFile("$TEST_JASPER_DIR/NestProps.jrprint");
         System.err.println("PDF creation time : " + (System.currentTimeMillis() - start));
     }
 
@@ -63,7 +65,7 @@ class NestPropsSpec extends Specification implements GrailsUnitTest {
     public void html() throws JRException
     {
         long start = System.currentTimeMillis();
-        JasperExportManager.exportReportToHtmlFile("target/jasper/NestProps.jrprint");
+        JasperExportManager.exportReportToHtmlFile("$TEST_JASPER_DIR/NestProps.jrprint");
         System.err.println("HTML creation time : " + (System.currentTimeMillis() - start));
     }
 
@@ -73,14 +75,14 @@ class NestPropsSpec extends Specification implements GrailsUnitTest {
     public void xml() throws JRException
     {
         long start = System.currentTimeMillis();
-        JasperExportManager.exportReportToXmlFile("target/jasper/NestProps.jrprint",false);
+        JasperExportManager.exportReportToXmlFile("$TEST_JASPER_DIR/NestProps.jrprint",false);
         System.err.println("HTML creation time : " + (System.currentTimeMillis() - start));
     }
 
 
     public void xhtml() throws JRException
     {
-        File sourceFile = new File("target/jasper/NestProps.jrprint");
+        File sourceFile = new File("$TEST_JASPER_DIR/NestProps.jrprint");
 
         JasperPrint jasperPrint = (JasperPrint)JRLoader.loadObject(sourceFile);
 

@@ -43,7 +43,7 @@ logs
 /web-app/plugins
 
 # "temporary" build files
-**/target
+#**/target
 **/out
 
 ### Java template

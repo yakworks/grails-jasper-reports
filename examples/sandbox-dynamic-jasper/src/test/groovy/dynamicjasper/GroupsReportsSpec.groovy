@@ -111,18 +111,18 @@ class GroupsReportsSpec extends Specification implements ControllerUnitTest<Repo
     }
 
     protected void exportReport() throws Exception {
-        ReportExporter.exportReport(jp, "target/dynamic/" + this.getClass().getSimpleName() + ".pdf");
+        ReportExporter.exportReport(jp, "test-reports/" + this.getClass().getSimpleName() + ".pdf");
         exportToJRXML();
-        JasperUtils.createExporterHTML(jp,new File("target/dynamic/" + this.getClass().getSimpleName() + ".html ")).exportReport()
-        ReportExporter.exportReport(jp, "target/dynamic/" + this.getClass().getSimpleName() + ".pdf");
+        JasperUtils.createExporterHTML(jp,new File("test-reports/" + this.getClass().getSimpleName() + ".html ")).exportReport()
+        ReportExporter.exportReport(jp, "test-reports/" + this.getClass().getSimpleName() + ".pdf");
     }
 
     protected void exportToJRXML() throws Exception {
         if (this.jr != null){
-            DynamicJasperHelper.generateJRXML(this.jr, "UTF-8","target/dynamic/" + this.getClass().getSimpleName() + ".jrxml");
+            DynamicJasperHelper.generateJRXML(this.jr, "UTF-8","test-reports/" + this.getClass().getSimpleName() + ".jrxml");
 
         } else {
-            DynamicJasperHelper.generateJRXML(this.dr, new ClassicLayoutManager(), this.rparams, "UTF-8","target/dynamic/" + this.getClass().getSimpleName() + ".jrxml");
+            DynamicJasperHelper.generateJRXML(this.dr, new ClassicLayoutManager(), this.rparams, "UTF-8","test-reports/" + this.getClass().getSimpleName() + ".jrxml");
         }
     }
 
