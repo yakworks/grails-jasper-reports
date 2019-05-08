@@ -26,7 +26,7 @@ jobs:
       # Download and cache dependencies
       - run:
           name: cat build.gradle files for cache key
-          command: cat gradle.properties build.gradle plugin/build.gradle test-projects/app/build.gradle > cache-checksum.tmp
+          command: cat gradle.properties build.gradle plugin/build.gradle examples/app/build.gradle > cache-checksum.tmp
       - restore_cache:
           keys:
             - gradle-{{ checksum "cache-checksum.tmp" }}
@@ -51,7 +51,7 @@ jobs:
 
       - run:
           name: ✔︎ -- Checks Linter and Tests [gradle check]
-          command: gradle check --no-daemon --max-workers 2
+          command: gradle check --no-daemon
       - store_artifacts:
           path: plugin/build/reports/tests/test/
           destination: test-reports/unit/
