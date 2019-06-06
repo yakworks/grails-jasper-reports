@@ -3,7 +3,7 @@ import nine.jasper.spring.JasperViewResolver
 
 class JasperReportsGrailsPlugin {
     // the plugin version
-    def version        = "0.4-SNAPSHOT"
+    def version        = "0.4"
     def grailsVersion  = "2.3 > *"
     def pluginExcludes = [
             "grails-app/views/**/*",
