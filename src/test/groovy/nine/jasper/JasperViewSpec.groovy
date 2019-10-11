@@ -86,6 +86,19 @@ class JasperViewSpec extends Specification {
         "xlsx"  | ""
     }
 
+    void "check SUBREPORT_DIR"() {
+        when:
+        View view = jasperViewResolver.resolveViewName(viewName,null)
+        model << [format: "html"]
+        view.render(model, request, response)
+
+        then:
+        view instanceof JasperView
+        ((JasperView)view).file.exists()
+        String res = response.getContentAsString()
+        res.length() > 0
+    }
+
     void "format with reponse from Accept header or params"() {
         when:
         View view = jasperViewResolver.resolveViewName(viewName,null)
