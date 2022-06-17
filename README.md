@@ -1,3 +1,7 @@
+## LATEST MOVED TO https://github.com/yakworks/spring-grails-kit
+Moved project for Grails 5 and Groovy 3 compatibility.
+go to https://github.com/yakworks/spring-grails-kit
+
 [![CircleCI](https://img.shields.io/circleci/project/github/yakworks/grails-jasper-reports/master.svg?longCache=true&style=for-the-badge&logo=circleci)](https://circleci.com/gh/yakworks/grails-jasper-reports)
 [![9ci](https://img.shields.io/badge/BUILT%20BY-9ci%20Inc-blue.svg?longCache=true&style=for-the-badge)](http://9ci.com)
 
